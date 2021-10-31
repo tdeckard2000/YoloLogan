@@ -9,6 +9,12 @@ export class HeaderComponent implements OnInit {
 
   constructor() { }
 
+  currentPage = "localEvents";
+
+  onNavigationClick(pageName: string){
+    this.currentPage = pageName;
+  };
+
   ngOnInit(): void {
   }
 

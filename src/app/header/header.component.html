@@ -1,4 +1,24 @@
 <mat-toolbar>
-  <span class="headerLogo">Yolo Utah</span>
-  <span class="headerExclamation">!</span>
+  <div class="headerMainContainer">
+    <div class="headerLogoContainer">
+      <div>
+        <span class="headerLogo">Yolo Logan</span>
+        <span class="headerExclamation">!</span>
+      </div>
+      <div class="headerSubtext">
+        Logan Utah Lifestyle
+      </div>
+    </div>
+    <div class="headerNavigation">
+      <button (click)="onNavigationClick('localEvents')"
+      [ngClass]="{buttonSelected: currentPage === 'localEvents'}" mat-stroked-button>Local Events
+      </button>
+      <button (click)="onNavigationClick('meetupGroups')"
+      [ngClass]="{buttonSelected: currentPage === 'meetupGroups'}" mat-stroked-button>Meetup Groups
+      </button>
+      <button (click)="onNavigationClick('communityResources')"
+      [ngClass]="{buttonSelected: currentPage === 'communityResources'}" mat-stroked-button>Community Resources
+      </button>
+    </div>
+  </div>
 </mat-toolbar>

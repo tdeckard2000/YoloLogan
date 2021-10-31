@@ -1,11 +1,42 @@
-.headerLogo{
+.buttonSelected {
+  background-color: #585858;
+}
+
+.headerMainContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.headerExclamation {
+  font-family: fantasy;
+  font-size: 2.7rem;
+  font-weight: 600;
+}
+
+.headerLogo {
   font-family: fantasy;
   font-size: 2rem;
   font-weight: 600;
 }
 
-.headerExclamation{
-  font-family: fantasy;
-  font-size: 2.7rem;
-  font-weight: 600;
+.headerLogoContainer {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+
+.headerNavigation {
+  align-self: end;
+
+  text-align: end;
+}
+
+.headerSubtext {
+  font-family: roboto;
+  font-size: 1rem;
+  line-height: 10px;
+  text-align: center;
 }
