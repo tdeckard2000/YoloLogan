@@ -1,12 +1,14 @@
 button {
   border-radius: 3px 3px 0px 0px;
-  background-color: #424242;
+  background-color: #e4e4e4;
+  color: black;
+  margin: 0 1px;
   width: 200px;
 }
 
 .buttonSelected {
-  background-color: #e4e4e4;
-  color: black;
+  background-color: #555555;
+  color: white;
 }
 
 .header {
