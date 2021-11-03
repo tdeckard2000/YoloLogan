@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { EventTileComponent } from './event-tile/event-tile.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     AppComponent,
     HeaderComponent,
     SearchBarComponent,
-    SidebarComponent
+    SidebarComponent,
+    EventTileComponent
   ],
   imports: [
     BrowserModule,

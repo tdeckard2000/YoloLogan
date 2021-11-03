@@ -23,17 +23,8 @@
     </div>
   </mat-drawer>
   <mat-drawer-content class="containerList">
-    <div>
-      More Content
-    </div>
-    <div>
-      More Content
-    </div>
-    <div>
-      More Content
-    </div>
-    <div>
-      More Content
-    </div>
+
+    <app-event-tile *ngFor="let item of exampleData" [tileData] = "item"></app-event-tile>
+
   </mat-drawer-content>
 </mat-drawer-container>
