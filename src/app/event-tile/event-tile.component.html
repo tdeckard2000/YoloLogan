@@ -1,10 +1,20 @@
 <div class="containerMain">
-  <h2>{{tileData.title}}</h2>
-  <h1>{{tileData.imageURL}}</h1>
-  <p>Hosted by: {{tileData.contactName}}
-    <span *ngIf="tileData.address.businessName">/ {{tileData.address.businessName}}</span></p>
-  <p>{{tileData.date | date}}</p>
-  <a href="{{'https://www.google.com/maps/place/' + tileData.address.street + ', ' + tileData.address.city + ', ' + tileData.address.state + ', ' + tileData.address.zip}}">
-    Google Maps</a>
-  <p>{{tileData.description}}</p>
+  <div class="columnLeft">
+    <img src="{{tileData.imageURL}}" alt="Image Of Event">
+  </div>
+  <div class="columnRight">
+    <h2>{{tileData.title}}</h2>
+    <p>Hosted by: {{tileData.contactName}}
+    <span *ngIf="tileData.address.businessName">, {{tileData.address.businessName}}</span></p>
+    <p>{{tileData.address.street + ' ' + tileData.address.city + ', ' + tileData.address.state + ' ' + tileData.address.zip}}
+    <a target="_blank" href="{{'https://www.google.com/maps/place/' + tileData.address.street + ', ' + tileData.address.city + ', ' + tileData.address.state + ', ' + tileData.address.zip}}">
+    View Map</a></p>
+    <p>{{tileData.date | date}}</p>
+    <p>{{tileData.description}}</p>
+    <span> </span>
+    <span *ngFor="let property of tileData.properties; first as isFirst">
+      <span>✔ </span>
+      {{property | titlecase}}
+    </span>
+  </div>
 </div>

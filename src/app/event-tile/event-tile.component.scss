@@ -1,6 +1,32 @@
+img {
+  // padding: 10px;
+  height: 150px;
+  width: 200px;
+  margin: 0px;
+  object-fit:cover;
+  border-radius: 10px;
+}
+
+p {
+  margin-bottom: 5px;
+}
+
+.columnLeft {
+  margin: 20px;
+}
+
+.columnRight {
+  margin: 20px;
+}
+
 .containerMain {
-  border: solid black 3px;
+  background-color: rgb(170, 170, 170);
+  // border: solid black 3px;
   border-radius: 5px;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  margin: auto;
   margin-bottom: 10px;
-  padding: 30px;
+  width: 95%;
 }
