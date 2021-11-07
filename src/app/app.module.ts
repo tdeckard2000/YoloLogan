@@ -11,6 +11,8 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { EventTileComponent } from './event-tile/event-tile.component';
+import { FormsModule } from '@angular/forms';
+import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { EventTileComponent } from './event-tile/event-tile.component';
     HeaderComponent,
     SearchBarComponent,
     SidebarComponent,
-    EventTileComponent
+    EventTileComponent,
+    FilterPipePipe
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,8 @@ import { EventTileComponent } from './event-tile/event-tile.component';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatSidenavModule
+    MatSidenavModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

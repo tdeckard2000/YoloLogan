@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import { ObjectUnsubscribedError } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
 import { EventObject } from '../services/interfaces';
 
 @Component({
@@ -88,6 +86,12 @@ export class SidebarComponent implements OnInit {
       }
     }
   ];
+
+  searchString:string = '';
+
+  onNewSearchString(newSearchString:string){
+    this.searchString = newSearchString;
+  };
 
   constructor() { }
 

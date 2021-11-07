@@ -1,7 +1,7 @@
 <div class="containerMain">
   <div class="containerRow1">
     <p class="pageTitle">PAGE TITLE</p>
-    <input type="text">
+    <input [(ngModel)]="searchString" (keyup)="onSearchString()" type="text">
     <button>Add Event +</button>
   </div>
   <div class="containerRow2">
