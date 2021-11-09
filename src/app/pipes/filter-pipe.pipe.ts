@@ -29,6 +29,5 @@ export class FilterPipePipe implements PipeTransform {
     };
 
     return this.filteredObjects;
-  }
-
-}
+  };
+};

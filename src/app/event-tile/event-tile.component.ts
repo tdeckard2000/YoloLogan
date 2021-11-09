@@ -9,6 +9,7 @@ import { EventObject } from '../services/interfaces';
 export class EventTileComponent implements OnInit {
 
   @Input() tileData:EventObject = {} as EventObject;
+  @Input() searchString:string = 'Pool';
 
   constructor() { }
 

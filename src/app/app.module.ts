@@ -13,6 +13,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { EventTileComponent } from './event-tile/event-tile.component';
 import { FormsModule } from '@angular/forms';
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
+import { HighlightTextPipe } from './pipes/highlight-text.pipe';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { FilterPipePipe } from './pipes/filter-pipe.pipe';
     SearchBarComponent,
     SidebarComponent,
     EventTileComponent,
-    FilterPipePipe
+    FilterPipePipe,
+    HighlightTextPipe
   ],
   imports: [
     BrowserModule,
