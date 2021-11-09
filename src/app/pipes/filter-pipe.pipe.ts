@@ -9,7 +9,7 @@ export class FilterPipePipe implements PipeTransform {
   filteredObjects:Array<EventObject> = [] as Array<EventObject>;
 
   transform(objectArray: Array<EventObject>, searchString:string): Array<EventObject> {
-    if(searchString.length < 2){
+    if(searchString.length < 3){
       return objectArray;
     };
 

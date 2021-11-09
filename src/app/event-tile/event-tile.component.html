@@ -4,14 +4,17 @@
   </div>
   <div class="columnRight">
     <h2 [innerHTML]="tileData.title | highlightText:searchString"></h2>
-    <p>Hosted by: {{tileData.contactName}}
-    <span *ngIf="tileData.address.businessName">, {{tileData.address.businessName}}</span></p>
+    <p> Hosted by: <span [innerHTML]="tileData.contactName | highlightText:searchString"></span>
+    <span *ngIf="tileData.address.businessName" [innerHTML]="', ' + tileData.address.businessName | highlightText:searchString"></span></p>
+
     <p>{{tileData.address.street + ' ' + tileData.address.city + ', ' + tileData.address.state + ' ' + tileData.address.zip}}
     <a target="_blank" href="{{'https://www.google.com/maps/place/' + tileData.address.street + ', ' + tileData.address.city + ', ' + tileData.address.state + ', ' + tileData.address.zip}}">
     View Map</a></p>
+
     <p>{{tileData.date | date}}</p>
+
     <p [innerHTML]="tileData.description | highlightText:searchString"></p>
-    <span> </span>
+
     <span *ngFor="let property of tileData.properties; first as isFirst">
       <span>✔ </span>
       {{property | titlecase}}

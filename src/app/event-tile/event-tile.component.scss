@@ -30,3 +30,11 @@ p {
   margin-bottom: 10px;
   width: 95%;
 }
+
+::ng-deep .highlightedText{
+  background: #71a9ff;
+  border-radius: 4px;
+  color: white;
+  margin: -3px;
+  padding: 0px 3px;
+}
