@@ -6,8 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class HighlightTextPipe implements PipeTransform {
   transform(documentText: string, textToHighlight:string): string {
     if(textToHighlight.length < 1){
-      console.log(textToHighlight)
-      console.log('too short')
       return documentText;
     };
 

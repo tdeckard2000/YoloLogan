@@ -8,7 +8,8 @@ export class FilterPipePipe implements PipeTransform {
 
   filteredObjects:Array<EventObject> = [] as Array<EventObject>;
 
-  transform(objectArray: Array<EventObject>, searchString:string): Array<EventObject> {
+  transform(objectArray: Array<EventObject>, searchString:string, checkboxFilters: object): Array<EventObject> {
+
     if(searchString.length < 3){
       return objectArray;
     };
@@ -17,6 +18,10 @@ export class FilterPipePipe implements PipeTransform {
     this.filteredObjects = [] as Array<EventObject>;
 
     for(let object of objectArray){
+      // if(object.properties.includes()){
+
+      // }
+
       if(object.title.toLowerCase().includes(searchString)){
         this.filteredObjects.push(object);
       }else if(object.description.toLowerCase().includes(searchString)){
