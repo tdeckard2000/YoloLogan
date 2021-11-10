@@ -1,28 +1,28 @@
 <app-search-bar (searchStringEmitter)="onNewSearchString($event)"></app-search-bar>
 <mat-drawer-container class="containerMain">
   <mat-drawer class="containerFilter" mode="side" opened>
-    <p>{{searchString}}</p>
-    <div>
-      Filters
-    </div>
-    <div>
-      Filters
-    </div>
-    <div>
-      Filters
-    </div>
-    <div>
-      Filters
-    </div>
-    <div>
-      Filters
-    </div>
-    <div>
-      Filters
-    </div>
-    <div>
-      Filters
-    </div>
+    <section class="example-section" [formGroup]="checkboxFilters">
+      <mat-checkbox class="checkboxItem" formControlName="kidFriendly" [disabled]="false">Kid Friendly</mat-checkbox>
+      <mat-checkbox class="checkboxItem" formControlName="adultsOnly">Adults Only</mat-checkbox>
+      <hr>
+      <mat-checkbox class="checkboxItem" formControlName="freeEvent">Free Event</mat-checkbox>
+      <mat-checkbox class="checkboxItem" formControlName="paidEvent">Paid Event</mat-checkbox>
+      <hr>
+      <mat-checkbox class="checkboxItem" formControlName="oneTimeEvent">One Time Event</mat-checkbox>
+      <mat-checkbox class="checkboxItem" formControlName="weeklyEvent">Weekly Event</mat-checkbox>
+      <mat-checkbox class="checkboxItem" formControlName="monthlyEvent">Monthly Event</mat-checkbox>
+      <hr>
+      <mat-checkbox class="checkboxItem" formControlName="dogFriendly">Dog Friendly</mat-checkbox>
+      <mat-checkbox class="checkboxItem" formControlName="catFriendly">Cat Friendly</mat-checkbox>
+      <hr>
+      <mat-checkbox class="checkboxItem" formControlName="coffee">Coffee</mat-checkbox>
+      <mat-checkbox class="checkboxItem" formControlName="noCoffee">No Coffee</mat-checkbox>
+      <mat-checkbox class="checkboxItem" formControlName="alcohol">Alcohol</mat-checkbox>
+      <mat-checkbox class="checkboxItem" formControlName="noAlcohol">No Alcohol</mat-checkbox>
+      <hr>
+      <mat-checkbox class="checkboxItem" formControlName="outdoors">Outdoors</mat-checkbox>
+      <mat-checkbox class="checkboxItem" formControlName="indoors">Indoors</mat-checkbox>
+    </section>
   </mat-drawer>
   <mat-drawer-content class="containerList">
 

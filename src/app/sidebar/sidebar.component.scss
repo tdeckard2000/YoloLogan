@@ -1,3 +1,7 @@
+hr {
+  border-color: #808080;
+}
+
 .containerMain {
   height: 80%;
   // width: 100vw;
@@ -10,4 +14,9 @@
 .containerFilter {
   padding: 30px;
   width: 300px;
+}
+
+.checkboxItem {
+  display: block;
+  padding-left: 12px;
 }

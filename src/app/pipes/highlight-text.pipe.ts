@@ -11,9 +11,7 @@ export class HighlightTextPipe implements PipeTransform {
       return documentText;
     };
 
-    console.log(textToHighlight)
     const re = new RegExp(textToHighlight, 'gi');
-    console.log(re)
     return documentText.replace(re, `<span class="highlightedText">$&</span>`);
   }
 }

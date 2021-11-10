@@ -11,9 +11,10 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { EventTileComponent } from './event-tile/event-tile.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 import { HighlightTextPipe } from './pipes/highlight-text.pipe';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -33,7 +34,9 @@ import { HighlightTextPipe } from './pipes/highlight-text.pipe';
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
-    FormsModule
+    FormsModule,
+    MatCheckboxModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

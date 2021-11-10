@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Form, FormBuilder, FormGroup } from '@angular/forms';
 import { EventObject } from '../services/interfaces';
 
 @Component({
@@ -87,13 +88,33 @@ export class SidebarComponent implements OnInit {
     }
   ];
 
+  constructor(fb: FormBuilder) {
+    this.checkboxFilters = fb.group({
+      kidFriendly: false,
+      adultsOnly: false,
+      freeEvent: false,
+      paidEvent: false,
+      oneTimeEvent: false,
+      weeklyEvent: false,
+      monthlyEvent: false,
+      dogFriendly: false,
+      catFriendly: false,
+      coffee: false,
+      noCoffee: false,
+      Alcohol: false,
+      noAlcohol: false,
+      outdoors: false,
+      indoors: false
+    });
+  };
+
+  checkboxFilters: FormGroup = {} as FormGroup;
   searchString:string = '';
 
   onNewSearchString(newSearchString:string){
     this.searchString = newSearchString;
   };
 
-  constructor() { }
 
   ngOnInit(): void {
   }
