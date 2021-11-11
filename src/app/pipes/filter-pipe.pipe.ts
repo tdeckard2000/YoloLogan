@@ -7,7 +7,6 @@ import { EventObject, FilterObject } from '../services/interfaces';
 })
 export class FilterPipePipe implements PipeTransform {
 
-  // filteredObjects:Array<EventObject> = [] as Array<EventObject>;
   filterMap = new Map([
     ['alcohol', 'Alcohol'],
     ['adultsOnly', 'Adults Only'],
