@@ -1,5 +1,4 @@
 <app-search-bar (searchStringEmitter)="onNewSearchString($event)"></app-search-bar>
-<p>{{checkboxFilters.value | json}}</p>
 <mat-drawer-container class="containerMain">
   <mat-drawer class="containerFilter" mode="side" opened>
     <section class="example-section" [formGroup]="checkboxFilters">

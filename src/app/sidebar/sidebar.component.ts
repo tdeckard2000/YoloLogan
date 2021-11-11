@@ -77,7 +77,7 @@ export class SidebarComponent implements OnInit {
       description: 'Come join us at the Cache Bar for some fun in the stage lights. No cover fee. Come hang out at the best bar in town!',
       eventUrl: 'https://gizmodo.com/',
       imageURL: 'assets/images/examplePic4.jpg',
-      properties: ['Adults Only', 'Free Event', 'Weekly Event'],
+      properties: ['Adults Only', 'Free Event', 'Weekly Event', 'Alcohol'],
       address: {
         city: 'Logan',
         state: 'Utah',
@@ -101,7 +101,7 @@ export class SidebarComponent implements OnInit {
       catFriendly: false,
       coffee: false,
       noCoffee: false,
-      Alcohol: false,
+      alcohol: false,
       noAlcohol: false,
       outdoors: false,
       indoors: false

@@ -18,4 +18,20 @@ export interface EventObject {
   };
 };
 
-
+export interface FilterObject {
+  kidFriendly: boolean,
+  adultsOnly: boolean,
+  freeEvent: boolean,
+  paidEvent: boolean,
+  oneTimeEvent: boolean,
+  weeklyEvent: boolean,
+  monthlyEvent: boolean,
+  dogFriendly: boolean,
+  catFriendly: boolean,
+  coffee: boolean,
+  noCoffee: boolean,
+  alcohol: boolean,
+  noAlcohol: boolean,
+  outdoors: boolean,
+  indoors: boolean
+}
