@@ -1,12 +1,29 @@
 <div class="containerMain">
   <div class="containerRow1">
-    <p class="pageTitle">PAGE TITLE</p>
-    <input [(ngModel)]="searchString" (keyup)="onSearchString()" type="text">
-    <button>Add Event +</button>
-  </div>
-  <div class="containerRow2">
-    <p>PAGE SUBTITLE</p>
-    <p>View Map *----------------*</p>
-    <p>Sort [------------]</p>
+    <div class="col1">
+      <mat-button-toggle-group class="pageToggle" name="pageToggle" aria-label="Font Style">
+        <mat-button-toggle class="pageToggleButton" value="eventsAndGroups" checked="true">Events & Groups</mat-button-toggle>
+        <mat-button-toggle class="pageToggleButton" value="communityResources">Community Resources</mat-button-toggle>
+      </mat-button-toggle-group>
+      <!-- <p class="pageTitle">Local Events & Groups</p>
+      <p>Get out on the town!</p> -->
+    </div>
+    <div class="col2">
+      <input id="searchBar" [(ngModel)]="searchString" (keyup)="onSearchString()" type="text">
+      <p>View Map *----------------*</p>
+    </div>
+    <div class="col3">
+      <button class="addEventButton">Add Event</button>
+      <label for="sortSelect">Filter </label>
+      <select name="sort" id="sortSelect">
+        <option value="">Date  <img src="../../assets/images/down-arrow.svg" alt=""> Test</option>
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="hamster">Hamster</option>
+        <option value="parrot">Parrot</option>
+        <option value="spider">Spider</option>
+        <option value="goldfish">Goldfish</option>
+    </select>
+    </div>
   </div>
 </div>
