@@ -25,8 +25,11 @@
     </section>
   </mat-drawer>
   <mat-drawer-content class="containerList">
-
-    <app-event-tile *ngFor="let item of exampleData | filterPipe:searchString:checkboxFilters.value" [tileData] = "item" [searchString]="searchString"></app-event-tile>
-
+    <div>
+      <app-event-tile *ngFor="let item of exampleData | filterPipe:searchString:checkboxFilters.value" [tileData] = "item" [searchString]="searchString"></app-event-tile>
+    </div>
+    <div>
+      <app-map></app-map>
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>

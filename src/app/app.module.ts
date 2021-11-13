@@ -16,6 +16,7 @@ import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 import { HighlightTextPipe } from './pipes/highlight-text.pipe';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MapComponent } from './map/map.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     SidebarComponent,
     EventTileComponent,
     FilterPipePipe,
-    HighlightTextPipe
+    HighlightTextPipe,
+    MapComponent
   ],
   imports: [
     BrowserModule,
