@@ -3,6 +3,7 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
+import {transform} from 'ol/proj.js';
 
 @Component({
   selector: 'app-map',
@@ -12,13 +13,13 @@ import OSM from 'ol/source/OSM';
 export class MapComponent implements OnInit {
 
   constructor() { }
-  map:Map = {} as Map
 
   ngOnInit(): void {
-    this.map = new Map({
+    let map = new Map({
       view: new View({
-        center: [0, 0],
-        zoom: 1,
+        // center: fromLonLat([41.7370, 111.8338]),
+        center: [131.044922, -25.363882],
+        zoom: 3,
       }),
       layers: [
         new TileLayer({

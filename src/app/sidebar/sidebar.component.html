@@ -28,7 +28,7 @@
     <div>
       <app-event-tile *ngFor="let item of exampleData | filterPipe:searchString:checkboxFilters.value" [tileData] = "item" [searchString]="searchString"></app-event-tile>
     </div>
-    <div>
+    <div class="dropShadow">
       <app-map></app-map>
     </div>
   </mat-drawer-content>

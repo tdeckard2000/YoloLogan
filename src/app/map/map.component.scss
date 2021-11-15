@@ -1,11 +1,11 @@
-p {
-  background-color: red;
-}
-
-.mapContainer {
+.containerMain {
+  margin-right: 20px;
   width: 200px;
 }
 
-.mapMain {
+.map-container {
+  height: calc(100% - 181px);
+  overflow: visible;
   position: fixed;
+  width: 200px;
 }
