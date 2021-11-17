@@ -2,6 +2,41 @@ hr {
   border-color: #808080;
 }
 
+.addEventDiv {
+  background-color: white;
+  border-radius: 5px;
+  margin: auto;
+  margin-bottom: 10px;
+  height: 35px;
+  position: relative;
+  width: 95%;
+}
+
+.addEventButton {
+  border-radius: 0 5px 5px 0;
+  border: 0;
+  border-right: 1px solid black;
+  font-weight: 500;
+  position: absolute;
+  right: 0px;
+  height: 100%;
+  width: 100px;
+}
+
+.addEventLabel {
+  color: black;
+  font-weight: 500;
+  line-height: 34px;
+  padding-left: 10px;
+}
+
+.addEventTextInput {
+  border: 1px solid #afafaf;
+  margin-left: 10px;
+  height: 70%;
+  width: 50%;
+}
+
 .containerMain {
   height: calc(100vh - 151px);
 }
@@ -20,4 +55,8 @@ hr {
 .checkboxItem {
   display: block;
   padding-left: 12px;
+}
+
+.filterForm {
+  overflow: hidden;
 }

@@ -1,11 +1,11 @@
 .containerMain {
   margin-right: 20px;
-  width: 200px;
+  width: 350px;
 }
 
 .map-container {
   height: calc(100% - 181px);
   overflow: visible;
   position: fixed;
-  width: 200px;
+  width: inherit;
 }

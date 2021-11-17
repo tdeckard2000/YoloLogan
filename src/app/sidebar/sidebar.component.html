@@ -1,7 +1,7 @@
 <app-search-bar (searchStringEmitter)="onNewSearchString($event)"></app-search-bar>
 <mat-drawer-container class="containerMain">
   <mat-drawer class="containerFilter" mode="side" opened>
-    <section class="example-section" [formGroup]="checkboxFilters">
+    <section class="filterForm" [formGroup]="checkboxFilters">
       <mat-checkbox class="checkboxItem" formControlName="kidFriendly" [disabled]="false">Kid Friendly</mat-checkbox>
       <mat-checkbox class="checkboxItem" formControlName="adultsOnly">Adults Only</mat-checkbox>
       <hr>
@@ -26,6 +26,11 @@
   </mat-drawer>
   <mat-drawer-content class="containerList">
     <div>
+      <div class="addEventDiv">
+        <span class="addEventLabel">Add a new event:</span>
+        <input class="addEventTextInput" type="text" name="" id="" placeholder="event name">
+        <button class="addEventButton">Create!</button>
+      </div>
       <app-event-tile *ngFor="let item of exampleData | filterPipe:searchString:checkboxFilters.value" [tileData] = "item" [searchString]="searchString"></app-event-tile>
     </div>
     <div class="dropShadow">
