@@ -2,18 +2,8 @@ hr {
   border-color: #808080;
 }
 
-.addEventDiv {
-  background-color: white;
-  border-radius: 5px;
-  margin: auto;
-  margin-bottom: 10px;
-  height: 35px;
-  position: relative;
-  width: 95%;
-}
-
 .addEventButton {
-  border-radius: 0 5px 5px 0;
+  border-radius: 0 3px 3px 0;
   border: 0;
   border-right: 1px solid black;
   font-weight: 500;
@@ -21,6 +11,16 @@ hr {
   right: 0px;
   height: 100%;
   width: 100px;
+}
+
+.addEventDiv {
+  background-color: white;
+  border-radius: 3px;
+  margin: auto;
+  margin-bottom: 10px;
+  height: 35px;
+  position: relative;
+  width: 98%;
 }
 
 .addEventLabel {
