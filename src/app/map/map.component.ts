@@ -4,8 +4,6 @@ import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 import {fromLonLat, transform} from 'ol/proj.js';
-import Control from 'ol/control/Control';
-import Zoom from 'ol/control/Zoom'
 
 @Component({
   selector: 'app-map',
@@ -33,6 +31,5 @@ export class MapComponent implements OnInit {
       ],
       target: 'ol-map'
     });
-    let buttonSizeControl = new Zoom({zoomInClassName: 'zoomInButton'})
   }
 }
