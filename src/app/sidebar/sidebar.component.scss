@@ -37,19 +37,24 @@ hr {
   width: 50%;
 }
 
-.containerMain {
-  height: calc(100vh - 151px);
+.containerEvents {
+  width: 100%;
+}
+
+.containerFilter {
+  padding: 30px;
+  width: 180px;
 }
 
 .containerList {
   display: flex;
   flex-direction: row;
   padding: 15px 0px;
+  scrollbar-gutter: stable both-edges;
 }
 
-.containerFilter {
-  padding: 30px;
-  width: 180px;
+.containerMain {
+  height: calc(100vh - 151px);
 }
 
 .checkboxItem {

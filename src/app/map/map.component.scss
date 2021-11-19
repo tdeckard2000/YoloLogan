@@ -1,11 +1,23 @@
 .containerMain {
-  margin-right: 20px;
-  width: 350px;
+  margin-right: 0px;
+  margin-top: -15px;
+  width: 30vw;
 }
 
 .map-container {
-  height: calc(100% - 181px);
+  height: calc(100% - 150px);
   overflow: visible;
   position: fixed;
   width: inherit;
+}
+
+.map-container:before {
+  box-shadow: inset 3px 3px 8px -6px black;
+  content: "";
+  height: 100%;
+  left: 0px;
+  pointer-events: none;
+  position: absolute;
+  width: inherit;
+  z-index: 1000;
 }

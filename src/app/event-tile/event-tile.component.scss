@@ -21,14 +21,13 @@ p {
 
 .containerMain {
   background-color: rgb(170, 170, 170);
-  // border: solid black 3px;
   border-radius: 5px;
   color: black;
   display: flex;
   flex-direction: row;
   margin: auto;
   margin-bottom: 10px;
-  width: 95%;
+  width: 98%;
 }
 
 ::ng-deep .highlightedText{

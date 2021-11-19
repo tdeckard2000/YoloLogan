@@ -25,7 +25,7 @@
     </section>
   </mat-drawer>
   <mat-drawer-content class="containerList">
-    <div>
+    <div class = containerEvents>
       <div class="addEventDiv">
         <span class="addEventLabel">Add a new event:</span>
         <input class="addEventTextInput" type="text" name="" id="" placeholder="event name">
@@ -33,7 +33,7 @@
       </div>
       <app-event-tile *ngFor="let item of exampleData | filterPipe:searchString:checkboxFilters.value" [tileData] = "item" [searchString]="searchString"></app-event-tile>
     </div>
-    <div class="dropShadow">
+    <div>
       <app-map></app-map>
     </div>
   </mat-drawer-content>
