@@ -22,6 +22,8 @@ export class SidebarComponent implements OnInit {
       imageURL: 'assets/images/examplePic1.jpeg',
       properties: ['Kid Friendly', 'Free Event', 'One Time Event', 'Dog Friendly'],
       address: {
+        coordLat: -111.870100,
+        coordLng: 41.727778,
         city: 'Logan',
         state: 'Utah',
         street: '650 S 100 E',
@@ -41,6 +43,8 @@ export class SidebarComponent implements OnInit {
       imageURL: 'assets/images/examplePic2.jpeg',
       properties: ['Adults Only', 'Paid Event', 'Weekly Event'],
       address: {
+        coordLat: -111.860100,
+        coordLng: 41.727778,
         city: 'Logan',
         state: 'Utah',
         street: '650 S 100 E',
@@ -60,6 +64,8 @@ export class SidebarComponent implements OnInit {
       imageURL: 'assets/images/examplePic3.jpg',
       properties: ['Adults Only', 'Paid Event', 'Monthly Event'],
       address: {
+        coordLat: -111.850100,
+        coordLng: 41.727778,
         city: 'Logan',
         state: 'Utah',
         street: '650 S 100 E',
@@ -79,6 +85,8 @@ export class SidebarComponent implements OnInit {
       imageURL: 'assets/images/examplePic4.jpg',
       properties: ['Adults Only', 'Free Event', 'Weekly Event', 'Alcohol'],
       address: {
+        coordLat: -111.840100,
+        coordLng: 41.727778,
         city: 'Logan',
         state: 'Utah',
         street: '119 Main St',

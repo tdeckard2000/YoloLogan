@@ -18,7 +18,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { MapComponent } from './map/map.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

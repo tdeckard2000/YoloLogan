@@ -10,6 +10,8 @@ export interface EventObject {
   imageURL: string,
   properties: Array<string>,
   address: {
+    coordLat: number,
+    coordLng: number,
     city: string,
     state: string,
     street: string,
