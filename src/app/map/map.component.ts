@@ -8,7 +8,8 @@ import { Feature } from 'ol';
 import Point from 'ol/geom/Point';
 import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
-import {Icon, Style} from 'ol/style';
+import {Fill, Icon, Style, Text} from 'ol/style';
+import Polygon from 'ol/geom/Polygon';
 
 @Component({
   selector: 'app-map',
@@ -39,19 +40,33 @@ export class MapComponent implements OnInit {
 
     const rome = new Feature({
       geometry: new Point(fromLonLat([-111.830833, 41.737778])),
+      name: 'Rome'
     });
 
-    rome.setStyle(
+    rome.setStyle([
       new Style({
         image: new Icon({
           color: '#ff0f00',
-      crossOrigin: 'anonymous',
-      // For Internet Explorer 11
-      imgSize: [50, 50],
-      src: 'assets/images/map-pin.svg',
+          crossOrigin: 'anonymous',
+          // For Internet Explorer 11
+          imgSize: [50, 50],
+          src: 'assets/images/map-pin.svg',
         })
-      })
-    )
+      }),
+      new Style({
+        text: new Text({
+          backgroundFill: new Fill({
+            color: 'white',
+
+          }),
+          font: '10px sans-serif',
+          offsetX: 0,
+          offsetY: -28,
+          padding: [2, 2, 2, 2],
+          text: 'Hello World',
+        })
+        })
+    ]);
 
     const vectorSource = new VectorSource({
       features: [rome]
