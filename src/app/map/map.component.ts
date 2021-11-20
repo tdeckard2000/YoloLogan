@@ -8,8 +8,7 @@ import { Feature } from 'ol';
 import Point from 'ol/geom/Point';
 import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
-import {Fill, Icon, Style, Text} from 'ol/style';
-import Polygon from 'ol/geom/Polygon';
+import {Fill, Icon, Stroke, Style, Text} from 'ol/style';
 
 @Component({
   selector: 'app-map',
@@ -39,31 +38,32 @@ export class MapComponent implements OnInit {
     });
 
     const rome = new Feature({
-      geometry: new Point(fromLonLat([-111.830833, 41.737778])),
+      geometry: new Point(fromLonLat([-111.880100, 41.727778])),
       name: 'Rome'
     });
 
     rome.setStyle([
       new Style({
         image: new Icon({
-          color: '#ff0f00',
+          color: 'white',
           crossOrigin: 'anonymous',
           // For Internet Explorer 11
-          imgSize: [50, 50],
-          src: 'assets/images/map-pin.svg',
+          imgSize: [25, 25],
+          src: 'assets/images/map-pin3.svg',
         })
       }),
       new Style({
         text: new Text({
-          backgroundFill: new Fill({
-            color: 'white',
-
-          }),
-          font: '10px sans-serif',
-          offsetX: 0,
-          offsetY: -28,
-          padding: [2, 2, 2, 2],
-          text: 'Hello World',
+          // backgroundFill: new Fill({
+          //   color: 'white'
+          // }),
+          fill: new Fill({color: 'black'}),
+          font: 'bold 12px sans-serif',
+          offsetX: -60,
+          offsetY: 2.5,
+          // padding: [2, 2, 2, 2],
+          stroke: new Stroke({color: 'white', width: 5}),
+          text: 'Volunteer Day..',
         })
         })
     ]);
