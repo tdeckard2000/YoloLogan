@@ -78,7 +78,5 @@ export class MapComponent implements OnInit {
 
     this.map.addLayer(mainLayer);
     this.map.addLayer(vectorLayer);
-
-    console.log(process.env.GOOGLE_API_KEY)
   }
 }
