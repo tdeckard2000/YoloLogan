@@ -37,6 +37,33 @@ hr {
   width: 50%;
 }
 
+.buttonClosePanel {
+  background-color: transparent;
+  border: none;
+  border-radius: 20px;
+  color: #c6c6c6;
+  font-weight: bold;
+  margin-bottom: 10px;
+  &:hover {
+    background-color: grey;
+    color: black;
+  }
+}
+
+.buttonOpenPanel {
+  background-color: #0000008c;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  height: 20px;
+  position: absolute;
+  width: 40px;
+  z-index: 500;
+  &:hover {
+    background-color: #000000c2;
+  }
+}
+
 .containerEvents {
   margin-left: -15px;
   width: 100%;

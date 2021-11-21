@@ -1,6 +1,7 @@
 <app-search-bar (searchStringEmitter)="onNewSearchString($event)"></app-search-bar>
 <mat-drawer-container class="containerMain">
-  <mat-drawer class="containerFilter" mode="side" opened>
+  <mat-drawer class="containerFilter" mode="side" opened={{sidePanelIsOpen}}>
+    <button class="buttonClosePanel" (click)="onToggleSidePanel()"><<</button>
     <section class="filterForm" [formGroup]="checkboxFilters">
       <mat-checkbox class="checkboxItem" formControlName="kidFriendly" [disabled]="false">Kid Friendly</mat-checkbox>
       <mat-checkbox class="checkboxItem" formControlName="adultsOnly">Adults Only</mat-checkbox>
@@ -26,6 +27,7 @@
   </mat-drawer>
   <mat-drawer-content class="containerList">
     <div class = containerEvents>
+      <button class="buttonOpenPanel" *ngIf="!sidePanelIsOpen" (click)="onToggleSidePanel()">>></button>
       <div class="addEventDiv">
         <span class="addEventLabel">Add a new event:</span>
         <input class="addEventTextInput" type="text" name="" id="" placeholder="event name">

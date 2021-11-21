@@ -118,11 +118,15 @@ export class SidebarComponent implements OnInit {
 
   checkboxFilters: FormGroup = {} as FormGroup;
   searchString:string = '';
+  sidePanelIsOpen = true;
 
   onNewSearchString(newSearchString:string){
     this.searchString = newSearchString;
   };
 
+  onToggleSidePanel(){
+    this.sidePanelIsOpen = !this.sidePanelIsOpen;
+  };
 
   ngOnInit(): void {
   }
