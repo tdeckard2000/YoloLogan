@@ -23,11 +23,74 @@ body {
 
 /* mobiles (landscape and portrait) */
 @media only screen and (min-width: 320px) and (max-width: 500px) {
+  #mediaContainerEvents {
+    margin: 10px;
+  }
+
   #mediaContainerFilter {
+    display: none;
     width: 100% !important;
   }
 
   #mediaMapContainerMain {
+    display: none;
     width: 100% !important;
+  }
+
+  #mediaSearchHeader {
+    flex-direction: column;
+
+    .col1 {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 0;
+      width: 100%;
+    }
+
+    .col2 {
+      width: 100%;
+
+      input {
+        max-width: none;
+        // padding: 0;
+        width: 85vw;
+      }
+    }
+
+    .headerLogo {
+      font-size: 1.4rem;
+    }
+
+    .headerExclamation {
+      font-size: 1.6rem;
+    }
+
+    .headerSubtext {
+      font-size: .7rem;
+    }
+
+    .pageToggle {
+      font-size: .7rem;
+      height: fit-content;
+
+      span {
+        line-height: 1.2;
+        padding: 4px;
+        white-space: pre-wrap;
+      }
+    }
+
+    .pageToggleButton {
+      width: 80px;
+    }
+  }
+
+  #mediaViewFilter {
+    display: block;
+  }
+
+  #mediaViewMap {
+    display: block;
   }
 }
