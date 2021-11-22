@@ -1,6 +1,6 @@
 <app-search-bar (searchStringEmitter)="onNewSearchString($event)"></app-search-bar>
 <mat-drawer-container class="containerMain">
-  <mat-drawer class="containerFilter" mode="side" opened={{sidePanelIsOpen}}>
+  <mat-drawer id="mediaContainerFilter" class="containerFilter" mode="side" opened={{sidePanelIsOpen}}>
     <button class="buttonClosePanel" (click)="onToggleSidePanel()"><<</button>
     <section class="filterForm" [formGroup]="checkboxFilters">
       <mat-checkbox class="checkboxItem" formControlName="kidFriendly" [disabled]="false">Kid Friendly</mat-checkbox>
