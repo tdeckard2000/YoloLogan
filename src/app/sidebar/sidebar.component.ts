@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup } from '@angular/forms';
 import { EventObject } from '../services/interfaces';
+import { MainService } from '../services/main.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -96,7 +97,7 @@ export class SidebarComponent implements OnInit {
     }
   ];
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, private mainService:MainService) {
     this.checkboxFilters = fb.group({
       kidFriendly: false,
       adultsOnly: false,
@@ -120,15 +121,14 @@ export class SidebarComponent implements OnInit {
   searchString:string = '';
   sidePanelIsOpen = true;
 
-  onNewSearchString(newSearchString:string){
-    this.searchString = newSearchString;
-  };
-
   onToggleSidePanel(){
     this.sidePanelIsOpen = !this.sidePanelIsOpen;
   };
 
   ngOnInit(): void {
+    this.mainService.getSearchString().subscribe((newSearchString:string)=>{
+        this.searchString = newSearchString;
+      });
   }
 
 }

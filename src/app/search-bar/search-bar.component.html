@@ -21,9 +21,9 @@
       <input id="searchBar" [(ngModel)]="searchString" (keyup)="onSearchString()" type="text">
     </div>
   </div>
-  <div id="mediaMobileButtonToggles" class="mobileButtonToggles">
-    <span><img src="../../assets/images/filterIcon.svg" alt=""></span>
-    <span><img src="../../assets/images/sortIcon.svg" alt=""></span>
-    <Span><img src="../../assets/images/mapIcon.svg" alt=""></Span>
+  <div id="mediaMobileToolToggles" class="mobileButtonToggles">
+    <img (click)="onMobileToolToggle('filter')" src="../../assets/images/filterIcon.svg" alt="">
+    <img (click)="onMobileToolToggle('sort')" src="../../assets/images/sortIcon.svg" alt="">
+    <img (click)="onMobileToolToggle('map')" src="../../assets/images/mapIcon.svg" alt="">
   </div>
 </div>
