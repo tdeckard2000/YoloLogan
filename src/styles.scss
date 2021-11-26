@@ -33,12 +33,12 @@ body {
   }
 
   #mediaContainerFilter {
-    display: none;
     width: 100% !important;
   }
 
   #mediaMapContainerMain {
-    display: none;
+    display:initial;
+    position: absolute;
     width: 100% !important;
   }
 

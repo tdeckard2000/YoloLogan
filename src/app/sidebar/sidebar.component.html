@@ -1,7 +1,7 @@
 <app-search-bar></app-search-bar>
 <mat-drawer-container class="containerMain">
-  <mat-drawer id="mediaContainerFilter" class="containerFilter" mode="side" opened={{sidePanelIsOpen}}>
-    <button class="buttonClosePanel" (click)="onToggleSidePanel()"><<</button>
+  <mat-drawer id="mediaContainerFilter" class="containerFilter" mode="side" opened={{sidePanelIsOpen}} *ngIf="(!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'filter')">
+    <button *ngIf="!isMobileDisplay" class="buttonClosePanel" (click)="onToggleSidePanel()"><<</button>
     <section class="filterForm" [formGroup]="checkboxFilters">
       <mat-checkbox class="checkboxItem" formControlName="kidFriendly" [disabled]="false">Kid Friendly</mat-checkbox>
       <mat-checkbox class="checkboxItem" formControlName="adultsOnly">Adults Only</mat-checkbox>
@@ -26,7 +26,7 @@
     </section>
   </mat-drawer>
   <mat-drawer-content class="containerList">
-    <div id="mediaContainerEvents" class="containerEvents">
+    <div id="mediaContainerEvents" class="containerEvents" *ngIf="(!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'main')">
       <button class="buttonOpenPanel" *ngIf="!sidePanelIsOpen" (click)="onToggleSidePanel()">>></button>
       <div id="mediaAddNewEvent" class="addEventDiv">
         <span class="addEventLabel">Add a new event:</span>
@@ -36,7 +36,7 @@
       <app-event-tile *ngFor="let item of exampleData | filterPipe:searchString:checkboxFilters.value" [tileData] = "item" [searchString]="searchString"></app-event-tile>
     </div>
     <div>
-      <app-map></app-map>
+      <app-map *ngIf="(!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'map')"></app-map>
     </div>
   </mat-drawer-content>
 </mat-drawer-container>
