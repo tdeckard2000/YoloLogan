@@ -65,9 +65,14 @@
   top: 15px;
 
   img {
+    border-radius: 15px;
     height: 15px;
     padding: 5px 20px;
   }
+}
+
+.mobileButtonToggleSelected {
+  background-color: #b7b7b7;
 }
 
 .pageTitle {

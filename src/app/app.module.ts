@@ -9,13 +9,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { EventTileComponent } from './event-tile/event-tile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 import { HighlightTextPipe } from './pipes/highlight-text.pipe';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MapComponent } from './map/map.component';
 
 @NgModule({

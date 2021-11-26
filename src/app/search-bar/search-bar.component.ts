@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { MainService } from '../services/main.service';
+import { WindowSizeService } from '../services/window-size.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -10,12 +11,19 @@ export class SearchBarComponent implements OnInit {
 
   @Output() searchStringEmitter = new EventEmitter();
 
-  constructor(public mainService:MainService) { }
+  constructor(private mainService:MainService, private windowSize:WindowSizeService) { }
 
   searchString = '';
+  mobileToolSelected = 'main';
 
   onMobileToolToggle(buttonName:string){
-    this.mainService.setMobileToolSelected(buttonName);
+    if(buttonName === this.mobileToolSelected){
+      this.mobileToolSelected = 'main';
+      this.mainService.setMobileToolSelected('main');
+    }else{
+      this.mobileToolSelected = buttonName;
+      this.mainService.setMobileToolSelected(buttonName);
+    };
   }
 
   onSearchString(){
@@ -25,6 +33,9 @@ export class SearchBarComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.windowSize.isSmallScreen.subscribe((result:any)=>{
+      console.log(result)
+    })
   }
 
 }

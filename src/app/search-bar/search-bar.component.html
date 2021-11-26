@@ -22,8 +22,8 @@
     </div>
   </div>
   <div id="mediaMobileToolToggles" class="mobileButtonToggles">
-    <img (click)="onMobileToolToggle('filter')" src="../../assets/images/filterIcon.svg" alt="">
-    <img (click)="onMobileToolToggle('sort')" src="../../assets/images/sortIcon.svg" alt="">
-    <img (click)="onMobileToolToggle('map')" src="../../assets/images/mapIcon.svg" alt="">
+    <img (click)="onMobileToolToggle('filter')" src="../../assets/images/filterIcon.svg" alt="" [ngClass]="{'mobileButtonToggleSelected': mobileToolSelected === 'filter'}">
+    <img (click)="onMobileToolToggle('sort')" src="../../assets/images/sortIcon.svg" alt="" [ngClass]="{'mobileButtonToggleSelected': mobileToolSelected === 'sort'}">
+    <img (click)="onMobileToolToggle('map')" src="../../assets/images/mapIcon.svg" alt="" [ngClass]="{'mobileButtonToggleSelected': mobileToolSelected === 'map'}">
   </div>
 </div>
