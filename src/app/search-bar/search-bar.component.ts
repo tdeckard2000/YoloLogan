@@ -11,7 +11,7 @@ export class SearchBarComponent implements OnInit {
 
   @Output() searchStringEmitter = new EventEmitter();
 
-  constructor(private mainService:MainService, private windowSize:WindowSizeService) { }
+  constructor(private mainService:MainService) { }
 
   searchString = '';
   mobileToolSelected = 'main';
@@ -33,9 +33,7 @@ export class SearchBarComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.windowSize.isSmallScreen.subscribe((result:any)=>{
-      console.log(result)
-    })
+
   }
 
 }

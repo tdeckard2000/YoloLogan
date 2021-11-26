@@ -1,8 +1,9 @@
+import { BreakpointState} from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpService } from '../services/http.service';
-import { EventObject } from '../services/interfaces';
 import { MainService } from '../services/main.service';
+import { WindowSizeService } from '../services/window-size.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,7 +12,7 @@ import { MainService } from '../services/main.service';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(fb: FormBuilder, private httpService:HttpService, private mainService:MainService) {
+  constructor(fb: FormBuilder, private httpService:HttpService, private mainService:MainService, private windowSize:WindowSizeService) {
     this.checkboxFilters = fb.group({
       kidFriendly: false,
       adultsOnly: false,
@@ -33,6 +34,8 @@ export class SidebarComponent implements OnInit {
 
   checkboxFilters: FormGroup = {} as FormGroup;
   exampleData = this.httpService.exampleData;
+  isMobileDisplay:boolean = false;
+  mobileToolSelected = 'main';
   searchString:string = '';
   sidePanelIsOpen = true;
 
@@ -41,9 +44,18 @@ export class SidebarComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.mainService.getSearchString().subscribe((newSearchString:string)=>{
-        this.searchString = newSearchString;
-      });
+    this.mainService.getSearchString().subscribe((result:string)=>{
+      this.searchString = result;
+    });
+
+    this.mainService.getMobileToolSelected().subscribe((result:string)=>{
+      this.mobileToolSelected = result;
+    });
+
+    this.windowSize.getIsMobile().subscribe((result:BreakpointState)=>{
+      this.isMobileDisplay = result.matches;
+    });
+
   }
 
 }
