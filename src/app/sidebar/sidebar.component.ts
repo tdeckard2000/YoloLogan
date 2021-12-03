@@ -2,6 +2,7 @@ import { BreakpointState} from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpService } from '../services/http.service';
+import { EventObject } from '../services/interfaces';
 import { MainService } from '../services/main.service';
 import { WindowSizeService } from '../services/window-size.service';
 
@@ -33,7 +34,7 @@ export class SidebarComponent implements OnInit {
   };
 
   checkboxFilters: FormGroup = {} as FormGroup;
-  exampleData = this.httpService.exampleData;
+  exampleData: Array<EventObject> = [] as Array<EventObject>;
   isMobileDisplay:boolean = false;
   mobileToolSelected = 'main';
   searchString:string = '';
@@ -54,6 +55,10 @@ export class SidebarComponent implements OnInit {
 
     this.windowSize.getIsMobile().subscribe((result:BreakpointState)=>{
       this.isMobileDisplay = result.matches;
+    });
+
+    this.httpService.getAllEvents().subscribe((data)=>{
+      this.exampleData = data;
     });
 
   }

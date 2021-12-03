@@ -1,12 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode} from '@angular/core';
 import { EventObject } from './interfaces';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class HttpService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  port = isDevMode()? 'http://localhost:3000' : '';
+
+  getAllEvents(){
+    return this.http.get<Array<EventObject>>(this.port + '/api/getAllEvents');
+  };
 
   exampleData:Array<EventObject> = [
     {
