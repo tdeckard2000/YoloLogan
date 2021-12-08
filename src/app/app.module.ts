@@ -18,7 +18,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MapComponent } from './map/map.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ModalNewEventComponent } from './modal-new-event/modal-new-event.component';
+import { ModalWrapper } from './modal-wrapper/modal-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { ModalNewEventComponent } from './modal-new-event/modal-new-event.compon
     FilterPipePipe,
     HighlightTextPipe,
     MapComponent,
-    ModalNewEventComponent
+    ModalWrapper
   ],
   imports: [
     BrowserModule,

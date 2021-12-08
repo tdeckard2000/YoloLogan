@@ -2,11 +2,11 @@ import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { element } from 'protractor';
 
 @Component({
-  selector: 'app-modal-new-event',
-  templateUrl: './modal-new-event.component.html',
-  styleUrls: ['./modal-new-event.component.scss']
+  selector: 'app-modal-wrapper',
+  templateUrl: './modal-wrapper.component.html',
+  styleUrls: ['./modal-wrapper.component.scss']
 })
-export class ModalNewEventComponent implements OnInit {
+export class ModalWrapper implements OnInit {
 
   constructor(private elementRef: ElementRef, private renderer2:Renderer2) { }
 

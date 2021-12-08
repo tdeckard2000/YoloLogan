@@ -1,5 +1,5 @@
 <app-search-bar></app-search-bar>
-<app-modal-new-event></app-modal-new-event>
+<app-modal-wrapper></app-modal-wrapper>
 <mat-drawer-container class="containerMain">
   <mat-drawer id="mediaContainerFilter" class="containerFilter" mode="side" opened={{sidePanelIsOpen}} *ngIf="(!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'filter')">
     <button *ngIf="!isMobileDisplay" class="buttonClosePanel" (click)="onToggleSidePanel()"><<</button>

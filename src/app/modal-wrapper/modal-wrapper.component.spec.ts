@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalNewEventComponent } from './modal-new-event.component';
+import { ModalWrapper } from './modal-wrapper.component';
 
 describe('ModalNewEventComponent', () => {
-  let component: ModalNewEventComponent;
-  let fixture: ComponentFixture<ModalNewEventComponent>;
+  let component: ModalWrapper;
+  let fixture: ComponentFixture<ModalWrapper>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalNewEventComponent ]
+      declarations: [ ModalWrapper ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModalNewEventComponent);
+    fixture = TestBed.createComponent(ModalWrapper);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
