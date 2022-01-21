@@ -1,5 +1,9 @@
-<div name='test' class="modalBackdrop">
+<div name='test' class="modalBackdrop" [style.visibility]="openModal ? 'visible' : 'hidden'">
   <div class="modalContainer">
-    <p>modal-new-event works!</p>
+    <div class="closeButton" (click)="onCloseButton()">X</div>
+    <h2 class="modalTitle">{{modalTile}}</h2>
+    <div class="modalBody">
+      <ng-content></ng-content>
+    </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 <app-search-bar></app-search-bar>
-<app-modal-wrapper></app-modal-wrapper>
+<app-modal-wrapper [modalTile]="'New Event'" [openModal]='openNewEventModal'>This Test</app-modal-wrapper>
 <mat-drawer-container class="containerMain">
   <mat-drawer id="mediaContainerFilter" class="containerFilter" mode="side" opened={{sidePanelIsOpen}} *ngIf="(!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'filter')">
     <button *ngIf="!isMobileDisplay" class="buttonClosePanel" (click)="onToggleSidePanel()"><<</button>
@@ -32,7 +32,7 @@
       <div id="mediaAddNewEvent" class="addEventDiv">
         <span class="addEventLabel">Add a new event:</span>
         <input class="addEventTextInput" type="text" name="" id="" placeholder="event name">
-        <button class="addEventButton">Create!</button>
+        <button class="addEventButton" (click)="onOpenNewEventModal()">Create!</button>
       </div>
       <app-event-tile *ngFor="let item of exampleData | filterPipe:searchString:checkboxFilters.value" [tileData] = "item" [searchString]="searchString"></app-event-tile>
     </div>

@@ -37,11 +37,18 @@ export class SidebarComponent implements OnInit {
   exampleData: Array<EventObject> = [] as Array<EventObject>;
   isMobileDisplay:boolean = false;
   mobileToolSelected = 'main';
+  openNewEventModal:boolean = false;
   searchString:string = '';
   sidePanelIsOpen = true;
 
   onToggleSidePanel(){
     this.sidePanelIsOpen = !this.sidePanelIsOpen;
+  };
+
+  onOpenNewEventModal() {
+    // this.openNewEventModal = this.openNewEventModal == true ? false:true;
+    this.openNewEventModal = true
+    console.log("clicked")
   };
 
   ngOnInit(): void {
