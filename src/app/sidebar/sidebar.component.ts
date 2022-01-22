@@ -1,6 +1,6 @@
 import { BreakpointState} from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
 import { HttpService } from '../services/http.service';
 import { EventObject } from '../services/interfaces';
 import { MainService } from '../services/main.service';
@@ -38,6 +38,7 @@ export class SidebarComponent implements OnInit {
   exampleData: Array<EventObject> = [] as Array<EventObject>;
   isMobileDisplay:boolean = false;
   mobileToolSelected = 'main';
+  newEventTitle = '';
   openNewEventModal:boolean = false;
   searchString:string = '';
   sidePanelIsOpen = true;
@@ -47,8 +48,7 @@ export class SidebarComponent implements OnInit {
   };
 
   onOpenNewEventModal() {
-    this.modalService.toggleModalById("test");
-    this.modalService.toggleModalById("test1")
+    this.modalService.toggleModalById("newEventModal");
   };
 
   ngOnInit(): void {

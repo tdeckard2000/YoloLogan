@@ -1,8 +1,8 @@
 <app-search-bar></app-search-bar>
 
-<app-modal-wrapper [closeOnClickOut]="true" [modalTile]="'New Event'" id="test">
+<app-modal-wrapper [closeOnClickOut]="true" [modalTile]="'New Event'" id="newEventModal">
   <label for="eventName">Event Title</label>
-  <input name="eventName" type="text">
+  <input name="eventName" type="text" [(ngModel)]="newEventTitle">
 
   <label for="eventAddress">Event Address</label>
   <input name="eventAddress" type="text">
@@ -50,7 +50,7 @@
       <button class="buttonOpenPanel" *ngIf="!sidePanelIsOpen" (click)="onToggleSidePanel()">>></button>
       <div id="mediaAddNewEvent" class="addEventDiv">
         <span class="addEventLabel">Add a new event:</span>
-        <input class="addEventTextInput" type="text" name="" id="" placeholder="event name">
+        <input class="addEventTextInput" type="text" name="" id="" placeholder="event name" [(ngModel)]="newEventTitle">
         <button class="addEventButton" (click)="onOpenNewEventModal()">Create!</button>
       </div>
       <app-event-tile *ngFor="let item of exampleData | filterPipe:searchString:checkboxFilters.value" [tileData] = "item" [searchString]="searchString"></app-event-tile>
