@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpService } from '../services/http.service';
 import { EventObject } from '../services/interfaces';
 import { MainService } from '../services/main.service';
+import { ModalService } from '../services/modal.service';
 import { WindowSizeService } from '../services/window-size.service';
 
 @Component({
@@ -13,7 +14,7 @@ import { WindowSizeService } from '../services/window-size.service';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(fb: FormBuilder, private httpService:HttpService, private mainService:MainService, private windowSize:WindowSizeService) {
+  constructor(fb: FormBuilder, private httpService:HttpService, private mainService:MainService, private windowSize:WindowSizeService, private modalService:ModalService) {
     this.checkboxFilters = fb.group({
       kidFriendly: false,
       adultsOnly: false,
@@ -46,9 +47,8 @@ export class SidebarComponent implements OnInit {
   };
 
   onOpenNewEventModal() {
-    // this.openNewEventModal = this.openNewEventModal == true ? false:true;
-    this.openNewEventModal = true
-    console.log("clicked")
+    this.modalService.toggleModalById("test");
+    this.modalService.toggleModalById("test1")
   };
 
   ngOnInit(): void {

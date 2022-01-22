@@ -1,5 +1,23 @@
 <app-search-bar></app-search-bar>
-<app-modal-wrapper [modalTile]="'New Event'" [openModal]='openNewEventModal'>This Test</app-modal-wrapper>
+
+<app-modal-wrapper [closeOnClickOut]="true" [modalTile]="'New Event'" id="test">
+  <label for="eventName">Event Title</label>
+  <input name="eventName" type="text">
+
+  <label for="eventAddress">Event Address</label>
+  <input name="eventAddress" type="text">
+
+  <label for="eventDescription">Event Description</label>
+  <textarea name="eventDescription" id="" cols="30" rows="10"></textarea>
+
+  <label for="eventDate">Event Date</label>
+  <input name="eventDate" type="date">
+
+  <label for="eventName">Image</label>
+  <input name="eventName" type="file">
+
+</app-modal-wrapper>
+
 <mat-drawer-container class="containerMain">
   <mat-drawer id="mediaContainerFilter" class="containerFilter" mode="side" opened={{sidePanelIsOpen}} *ngIf="(!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'filter')">
     <button *ngIf="!isMobileDisplay" class="buttonClosePanel" (click)="onToggleSidePanel()"><<</button>
@@ -26,6 +44,7 @@
       <mat-checkbox class="checkboxItem" formControlName="indoors">Indoors</mat-checkbox>
     </section>
   </mat-drawer>
+
   <mat-drawer-content class="containerList">
     <div id="mediaContainerEvents" class="containerEvents" *ngIf="(!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'main')">
       <button class="buttonOpenPanel" *ngIf="!sidePanelIsOpen" (click)="onToggleSidePanel()">>></button>
@@ -40,4 +59,5 @@
       <app-map *ngIf="(!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'map')"></app-map>
     </div>
   </mat-drawer-content>
+
 </mat-drawer-container>

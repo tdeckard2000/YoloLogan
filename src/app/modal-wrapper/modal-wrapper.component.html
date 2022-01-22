@@ -1,4 +1,4 @@
-<div name='test' class="modalBackdrop" [style.visibility]="openModal ? 'visible' : 'hidden'">
+<div class="modalBackdrop" [style.visibility]="modalIsOpen ? 'visible' : 'hidden'" (click)="onBackdropClick($event)">
   <div class="modalContainer">
     <div class="closeButton" (click)="onCloseButton()">X</div>
     <h2 class="modalTitle">{{modalTile}}</h2>

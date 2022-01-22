@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { ModalService } from '../services/modal.service';
 
 @Component({
   selector: 'app-modal-wrapper',
@@ -7,27 +8,31 @@ import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 })
 export class ModalWrapper implements OnInit {
 
-  constructor(private elementRef: ElementRef, private renderer2:Renderer2) { }
+  constructor(private modalService:ModalService, private elementRef:ElementRef) {}
 
+  @Input() closeOnClickOut:boolean = true;
   @Input() modalTile:string = '';
-  @Input() set openModal(val:boolean) {
-    this._openModal = val;
-    console.log("_openModal: ", this.openModal)
-  }
-  get openModal():boolean {
-    return this._openModal;
-  }
+  @Input() id:string = '';
 
-  public _openModal: boolean = false;
+  modalIsOpen:boolean = false;
+
+  onBackdropClick($event:any){
+    const elementClicked = $event.target.getAttribute('class');
+    if(elementClicked === "modalBackdrop" && this.closeOnClickOut){
+      this.modalIsOpen = false;
+    }
+  };
 
   onCloseButton(){
-    this.openModal = false;
+    this.modalIsOpen = false;
   };
 
   ngOnInit(): void {
-    // this.renderer2.setStyle(this.elementRef.nativeElement, 'display', 'absolute')
-    console.log("here first")
-    // this.showModal = true
+    this.modalService.toggleModal.subscribe((val:string)=>{
+      if(val === this.id){
+        this.modalIsOpen = !this.modalIsOpen;
+      };
+    });
   }
 
 }
