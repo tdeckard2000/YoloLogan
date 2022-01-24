@@ -8,10 +8,10 @@ export class ModalService {
 
   constructor() { }
 
-  toggleModal:Subject<string> = new Subject;
+  toggleModal$:Subject<string> = new Subject;
 
   toggleModalById(modalId:string){
-    this.toggleModal.next(modalId);
+    this.toggleModal$.next(modalId);
   };
 
 }

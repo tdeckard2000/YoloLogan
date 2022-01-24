@@ -19,6 +19,9 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MapComponent } from './map/map.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalWrapper } from './modal-wrapper/modal-wrapper.component';
+import { NewEventModalComponent } from './new-event-modal/new-event-modal.component';
+import { PostAsGuestModalComponent } from './post-as-guest-modal/post-as-guest-modal.component';
+import { SignInModalComponent } from './sign-in-modal/sign-in-modal.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { ModalWrapper } from './modal-wrapper/modal-wrapper.component';
     FilterPipePipe,
     HighlightTextPipe,
     MapComponent,
-    ModalWrapper
+    ModalWrapper,
+    NewEventModalComponent,
+    PostAsGuestModalComponent,
+    SignInModalComponent
   ],
   imports: [
     BrowserModule,

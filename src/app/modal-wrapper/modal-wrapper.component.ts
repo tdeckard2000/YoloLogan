@@ -11,7 +11,7 @@ export class ModalWrapper implements OnInit {
   constructor(private modalService:ModalService, private elementRef:ElementRef) {}
 
   @Input() closeOnClickOut:boolean = true;
-  @Input() modalTile:string = '';
+  @Input() modalTitle:string = '';
   @Input() id:string = '';
 
   modalIsOpen:boolean = false;
@@ -28,7 +28,7 @@ export class ModalWrapper implements OnInit {
   };
 
   ngOnInit(): void {
-    this.modalService.toggleModal.subscribe((val:string)=>{
+    this.modalService.toggleModal$.subscribe((val:string)=>{
       if(val === this.id){
         this.modalIsOpen = !this.modalIsOpen;
       };

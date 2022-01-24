@@ -1,0 +1,25 @@
+<app-modal-wrapper id="postAsGuestModal" [modalTitle]="'Post As Guest'">
+  <form action="" [formGroup]="postAsGuestForm">
+    <label for="hostFirstName">First Name</label>
+    <input name="hostFirstName" type="text" formControlName="hostFirstName">
+
+    <label for="hostLastName">Last Name</label>
+    <input name="hostLastName" type="text" formControlName="hostLastName">
+
+    <mat-checkbox class="checkboxItem" formControlName="hostHideName">Don't Show</mat-checkbox>
+
+    <label for="hostEmail">Email</label>
+    <input name="hostEmail" type="text" formControlName="hostEmail">
+
+    <mat-checkbox class="checkboxItem" formControlName="hostHideEmail">Don't Show</mat-checkbox>
+
+    <label for="hostPhone">Phone</label>
+    <input name="hostPhone" type="text" formControlName="hostPhone">
+
+    <mat-checkbox class="checkboxItem" formControlName="hostHidePhone">Don't Show</mat-checkbox>
+  </form>
+
+  <hr>
+  <h3>Or..</h3>
+  <button (click)="onToggleSignInModal()">Sign In</button>
+</app-modal-wrapper>

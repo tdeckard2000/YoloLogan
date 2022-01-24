@@ -1,0 +1,37 @@
+<app-modal-wrapper [closeOnClickOut]="true" [modalTitle]="'New Logan Event'" id="newEventModal">
+  <form class="newEventForm" [formGroup]="newEventForm">
+    <label for="eventName">Title</label>
+    <input name="eventName" type="text" [(ngModel)]="newEventTitle" formControlName="eventName">
+
+    <label for="eventAddress">Address</label>
+    <input name="eventAddress" type="text" formControlName="eventAddress">
+
+    <label for="eventDescription">Description</label>
+    <textarea name="eventDescription" id="" cols="50" rows="3" formControlName="eventDescription"></textarea>
+
+    <label for="eventDate">Event Date</label>
+    <input name="eventDate" type="date" formControlName="eventDate">
+
+    <label for="eventImage">Image</label>
+    <input name="eventImage" type="file" formControlName="eventImage">
+
+    <div class="newEventTags" formGroupName="eventTags">
+      <div>
+        <mat-checkbox class="checkboxItem" formControlName="tagAlcohol">Alcohol</mat-checkbox>
+        <mat-checkbox class="checkboxItem" formControlName="tagCatFriendly">Cat Friendly</mat-checkbox>
+        <mat-checkbox class="checkboxItem" formControlName="tagCoffee">Coffee</mat-checkbox>
+      </div>
+      <div>
+        <mat-checkbox class="checkboxItem" formControlName="tagDogFriendly">Dog Friendly</mat-checkbox>
+        <mat-checkbox class="checkboxItem" formControlName="tagFreeEvent">Free Event</mat-checkbox>
+        <mat-checkbox class="checkboxItem" formControlName="tagKidFriendly">Kid Friendly</mat-checkbox>
+      </div>
+      <mat-checkbox class="checkboxItem" formControlName="tagOutdoorsEvent">Outdoors Event</mat-checkbox>
+    </div>
+  </form>
+
+  <div class="newEventModalButtons">
+    <button (click)="onToggleNewEventModal()">Cancel</button>
+    <button (click)="onPostNewEvent()">Post It</button>
+  </div>
+</app-modal-wrapper>

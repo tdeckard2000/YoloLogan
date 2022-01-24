@@ -1,6 +1,6 @@
 import { BreakpointState} from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { HttpService } from '../services/http.service';
 import { EventObject } from '../services/interfaces';
 import { MainService } from '../services/main.service';
@@ -47,8 +47,10 @@ export class SidebarComponent implements OnInit {
     this.sidePanelIsOpen = !this.sidePanelIsOpen;
   };
 
-  onOpenNewEventModal() {
+  onToggleNewEventModal() {
     this.modalService.toggleModalById("newEventModal");
+    this.mainService.setNewEventTitle(this.newEventTitle)
+    this.newEventTitle = "";
   };
 
   ngOnInit(): void {

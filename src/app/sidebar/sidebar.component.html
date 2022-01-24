@@ -1,22 +1,10 @@
 <app-search-bar></app-search-bar>
 
-<app-modal-wrapper [closeOnClickOut]="true" [modalTile]="'New Event'" id="newEventModal">
-  <label for="eventName">Event Title</label>
-  <input name="eventName" type="text" [(ngModel)]="newEventTitle">
+<app-new-event-modal></app-new-event-modal>
 
-  <label for="eventAddress">Event Address</label>
-  <input name="eventAddress" type="text">
+<app-sign-in-modal></app-sign-in-modal>
 
-  <label for="eventDescription">Event Description</label>
-  <textarea name="eventDescription" id="" cols="30" rows="10"></textarea>
-
-  <label for="eventDate">Event Date</label>
-  <input name="eventDate" type="date">
-
-  <label for="eventName">Image</label>
-  <input name="eventName" type="file">
-
-</app-modal-wrapper>
+<app-post-as-guest-modal></app-post-as-guest-modal>
 
 <mat-drawer-container class="containerMain">
   <mat-drawer id="mediaContainerFilter" class="containerFilter" mode="side" opened={{sidePanelIsOpen}} *ngIf="(!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'filter')">
@@ -51,7 +39,7 @@
       <div id="mediaAddNewEvent" class="addEventDiv">
         <span class="addEventLabel">Add a new event:</span>
         <input class="addEventTextInput" type="text" name="" id="" placeholder="event name" [(ngModel)]="newEventTitle">
-        <button class="addEventButton" (click)="onOpenNewEventModal()">Create!</button>
+        <button class="addEventButton" (click)="onToggleNewEventModal()">Create!</button>
       </div>
       <app-event-tile *ngFor="let item of exampleData | filterPipe:searchString:checkboxFilters.value" [tileData] = "item" [searchString]="searchString"></app-event-tile>
     </div>
