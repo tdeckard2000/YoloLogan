@@ -28,7 +28,8 @@ export class NewEventModalComponent implements OnInit {
       tagFreeEvent: new FormControl(),
       tagKidFriendly: new FormControl(),
       tagOutdoorsEvent: new FormControl(),
-    })
+    }),
+    eventWebsite: new FormControl()
   });
 
   onPostNewEvent() {

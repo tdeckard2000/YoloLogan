@@ -20,6 +20,7 @@ export class HttpService {
     {
       _id: "4747437a7833748347b78434c",
       title: 'Dogs Splash Pool Day',
+      businessName: 'Logan Community Pool',
       contactEmail: 'tdeckard@notmydog.com',
       contactPhone: '812-360-1234',
       contactName: 'Jack Black',
@@ -35,12 +36,12 @@ export class HttpService {
         state: 'Utah',
         street: '650 S 100 E',
         zip: '84321',
-        businessName: 'Logan Community Pool'
       }
     },
     {
       _id: "4747437a7833748347578434c",
       title: 'Tech Talk - Cyber Security',
+      businessName: '',
       contactEmail: 'techx@mrTech.com',
       contactName: 'Randy Newman',
       contactPhone: '812-360-9945',
@@ -56,12 +57,12 @@ export class HttpService {
         state: 'Utah',
         street: '650 S 100 E',
         zip: '84321',
-        businessName: ''
       }
     },
     {
       _id: "4747437ae833748347b78434c",
       title: 'Volunteer Day at Zootah!',
+      businessName: '',
       contactEmail: 'zoo@tah.hov',
       contactName: 'Steve Irwin',
       contactPhone: '313.313.3138',
@@ -77,12 +78,12 @@ export class HttpService {
         state: 'Utah',
         street: '650 S 100 E',
         zip: '84321',
-        businessName: ''
       }
     },
     {
       _id: "4747437a4833748347b78434c",
       title: 'Karaoke Night!',
+      businessName: 'The Cache Bar',
       contactEmail: 'zoo@tah.hov',
       contactName: 'Marshall B. Mathers',
       contactPhone: '313.313.3138',
@@ -98,7 +99,6 @@ export class HttpService {
         state: 'Utah',
         street: '119 Main St',
         zip: '84321',
-        businessName: 'The Cache Bar'
       }
     }
   ];

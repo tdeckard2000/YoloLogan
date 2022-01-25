@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { ModalService } from '../services/modal.service';
 
 @Component({
@@ -12,6 +12,7 @@ export class PostAsGuestModalComponent implements OnInit {
   constructor(private modalService:ModalService) { }
 
   postAsGuestForm = new FormGroup({
+    hostBusinessName: new FormControl(),
     hostEmail: new FormControl(),
     hostFirstName: new FormControl(),
     hostHideEmail: new FormControl(),
@@ -21,7 +22,15 @@ export class PostAsGuestModalComponent implements OnInit {
     hostPhone: new FormControl(),
   });
 
-  onToggleSignInModal(){
+  onBack() {
+    this.modalService.toggleModalById('postAsGuestModal')
+  }
+
+  onPost() {
+
+  }
+
+  onToggleSignInModal() {
     this.modalService.toggleModalById('postAsGuestModal')
     this.modalService.toggleModalById('signInModal')
   }

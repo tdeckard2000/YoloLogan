@@ -5,7 +5,7 @@
   <div class="columnRight">
     <h2 [innerHTML]="tileData.title | highlightText:searchString"></h2>
     <p> Hosted by: <span [innerHTML]="tileData.contactName | highlightText:searchString"></span>
-    <span *ngIf="tileData.address.businessName" [innerHTML]="', ' + tileData.address.businessName | highlightText:searchString"></span></p>
+    <span *ngIf="tileData.businessName" [innerHTML]="', ' + tileData.businessName | highlightText:searchString"></span></p>
 
     <p>{{tileData.address.street + ' ' + tileData.address.city + ', ' + tileData.address.state + ' ' + tileData.address.zip}}
     <a target="_blank" href="{{'https://www.google.com/maps/place/' + tileData.address.street + ', ' + tileData.address.city + ', ' + tileData.address.state + ', ' + tileData.address.zip}}">

@@ -1,6 +1,7 @@
 export interface EventObject {
   _id: string,
   title: string,
+  businessName: string
   contactEmail: string,
   contactPhone: string,
   contactName: string,
@@ -16,7 +17,6 @@ export interface EventObject {
     state: string,
     street: string,
     zip: string,
-    businessName: string
   };
 };
 
