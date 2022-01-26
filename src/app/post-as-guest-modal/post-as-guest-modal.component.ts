@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { HttpService } from '../services/http.service';
 import { ModalService } from '../services/modal.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { ModalService } from '../services/modal.service';
 })
 export class PostAsGuestModalComponent implements OnInit {
 
-  constructor(private modalService:ModalService) { }
+  constructor(private modalService:ModalService, private httpService:HttpService) { }
 
   postAsGuestForm = new FormGroup({
     hostBusinessName: new FormControl(),
@@ -27,7 +28,16 @@ export class PostAsGuestModalComponent implements OnInit {
   }
 
   onPost() {
-
+    this.httpService.postNewEvent(this.httpService.exampleData[3]).subscribe((val:any)=>{
+      const successful = val.acknowledged;
+      if(successful) {
+        this.modalService.toggleModalById('successfulPostModal');
+        this.modalService.toggleModalById('postAsGuestModal');
+        this.modalService.toggleModalById('newEventModal');
+      } else {
+        console.warn('Error Posting from Guest Modal')
+      };
+    });
   }
 
   onToggleSignInModal() {

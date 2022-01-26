@@ -1,5 +1,4 @@
 export interface EventObject {
-  _id: string,
   title: string,
   businessName: string
   contactEmail: string,

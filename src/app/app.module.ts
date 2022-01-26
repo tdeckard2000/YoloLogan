@@ -22,6 +22,7 @@ import { ModalWrapper } from './modal-wrapper/modal-wrapper.component';
 import { NewEventModalComponent } from './new-event-modal/new-event-modal.component';
 import { PostAsGuestModalComponent } from './post-as-guest-modal/post-as-guest-modal.component';
 import { SignInModalComponent } from './sign-in-modal/sign-in-modal.component';
+import { SuccessfulPostModalComponent } from './successful-post-modal/successful-post-modal.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SignInModalComponent } from './sign-in-modal/sign-in-modal.component';
     ModalWrapper,
     NewEventModalComponent,
     PostAsGuestModalComponent,
-    SignInModalComponent
+    SignInModalComponent,
+    SuccessfulPostModalComponent
   ],
   imports: [
     BrowserModule,

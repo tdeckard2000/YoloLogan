@@ -1,6 +1,7 @@
 import { Injectable, isDevMode} from '@angular/core';
 import { EventObject } from './interfaces';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +11,20 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
+  headers = {'content-type': 'application/json'};
   port = isDevMode()? 'http://localhost:3000' : '';
 
-  getAllEvents(){
+  getAllEvents() {
     return this.http.get<Array<EventObject>>(this.port + '/api/getAllEvents');
+  };
+
+  postNewEvent(eventObject:EventObject): Observable<any> {
+    const eventObjectStringify = JSON.stringify(eventObject);
+    return this.http.post<any>(this.port + '/api/postNewEvent', eventObjectStringify, {'headers':this.headers})
   };
 
   exampleData:Array<EventObject> = [
     {
-      _id: "4747437a7833748347b78434c",
       title: 'Dogs Splash Pool Day',
       businessName: 'Logan Community Pool',
       contactEmail: 'tdeckard@notmydog.com',
@@ -39,7 +45,6 @@ export class HttpService {
       }
     },
     {
-      _id: "4747437a7833748347578434c",
       title: 'Tech Talk - Cyber Security',
       businessName: '',
       contactEmail: 'techx@mrTech.com',
@@ -60,7 +65,6 @@ export class HttpService {
       }
     },
     {
-      _id: "4747437ae833748347b78434c",
       title: 'Volunteer Day at Zootah!',
       businessName: '',
       contactEmail: 'zoo@tah.hov',
@@ -81,7 +85,6 @@ export class HttpService {
       }
     },
     {
-      _id: "4747437a4833748347b78434c",
       title: 'Karaoke Night!',
       businessName: 'The Cache Bar',
       contactEmail: 'zoo@tah.hov',
