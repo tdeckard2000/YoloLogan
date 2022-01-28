@@ -32,16 +32,65 @@ export class NewEventModalComponent implements OnInit {
     eventWebsite: new FormControl()
   });
 
+  createNewEventInfoObject() {
+    const address:Object = {};
+    const form = this.newEventForm;
+    let properties:Array<string> = [];
+
+    if(form.get('eventTags')?.get('tagAlcohol')?.value) {
+      properties.push('alcohol');
+    };
+
+    if(form.get('eventTags')?.get('tagCatFriendly')?.value) {
+      properties.push('catFriendly');
+    };
+
+    if(form.get('eventTags')?.get('tagCoffee')?.value) {
+      properties.push('coffee');
+    };
+
+    if(form.get('eventTags')?.get('tagDogFriendly')?.value) {
+      properties.push('dogFriendly');
+    };
+
+    if(form.get('eventTags')?.get('tagFreeEvent')?.value) {
+      properties.push('freeEvent');
+    };
+
+    if(form.get('eventTags')?.get('tagKidFriendly')?.value) {
+      properties.push('kidFriendly');
+    };
+
+    if(form.get('eventTags')?.get('tagOutdoorsEvent')?.value) {
+      properties.push('outdoors');
+    };
+
+    const newEventInfoObject = {
+      title: form.get('eventName')?.value,
+      date: form.get('eventDate')?.value,
+      description: form.get('eventDescription')?.value,
+      eventUrl: form.get('eventWebsite')?.value,
+      imageURL: form.get('eventImage')?.value,
+      properties: properties,
+      address: address
+    };
+
+    console.log(form.get('eventTags')?.get('tagFreeEvent')?.value)
+    return newEventInfoObject;
+  };
+
   onPostNewEvent() {
-    this.modalService.toggleModalById("postAsGuestModal")
-  }
+    const newEventInfoObject = this.createNewEventInfoObject();
+    this.mainService.setNewEventInfo(newEventInfoObject);
+    this.modalService.toggleModalById("postAsGuestModal");
+  };
 
   onToggleNewEventModal() {
     this.modalService.toggleModalById("newEventModal");
   };
 
   ngOnInit(): void {
-    this.mainService.newEventTitle$.subscribe((val:string)=>{
+    this.mainService.getNewEventTitle().subscribe((val:string)=>{
       this.newEventTitle = val;
     })
   }
