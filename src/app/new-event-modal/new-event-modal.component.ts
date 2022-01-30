@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { EventObject } from '../services/interfaces';
 import { MainService } from '../services/main.service';
 import { ModalService } from '../services/modal.service';
 
@@ -10,10 +11,15 @@ import { ModalService } from '../services/modal.service';
 })
 export class NewEventModalComponent implements OnInit {
 
-  constructor(private modalService:ModalService, private mainService:MainService) { }
+  constructor(private modalService:ModalService, private mainService:MainService) {
+    this.loadGoogleMapsScriptPromise = new Promise((resolve) => {
+      this.loadGoogleMapsScript();
+      resolve(true);
+    });
+  }
 
+  loadGoogleMapsScriptPromise: Promise<any> = {} as Promise<any>;
   newEventTitle:string = '';
-
   newEventForm = new FormGroup({
     eventAddress: new FormControl(),
     eventDate: new FormControl(),
@@ -33,7 +39,15 @@ export class NewEventModalComponent implements OnInit {
   });
 
   createNewEventInfoObject() {
-    const address:Object = {};
+    let address = {
+      coordLat: 1,
+      coordLng: 2,
+      city: 'sr',
+      state: 'st',
+      street: 'sr',
+      zip: 'st',
+    };
+
     const form = this.newEventForm;
     let properties:Array<string> = [];
 
@@ -65,7 +79,7 @@ export class NewEventModalComponent implements OnInit {
       properties.push('outdoors');
     };
 
-    const newEventInfoObject = {
+    const newEventInfoObject:Partial<EventObject> = {
       title: form.get('eventName')?.value,
       date: form.get('eventDate')?.value,
       description: form.get('eventDescription')?.value,
@@ -89,10 +103,22 @@ export class NewEventModalComponent implements OnInit {
     this.modalService.toggleModalById("newEventModal");
   };
 
+  loadGoogleMapsScript() {
+    const mapsAPIScript = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCJc-yDaLOZIIjGIdYQgHLAyD2Kz8O-u7U&libraries=places&callback=initAutocomplete";
+    let node = document.createElement('script');
+    node.type = 'text/javascript';
+    node.async = true;
+    node.defer = true;
+    node.charset = 'utf-8';
+    node.innerHTML = "initAutocomplete = function(){console.log('AUTO')}"
+    node.src = mapsAPIScript;
+    document.getElementsByTagName('head')[0].appendChild(node);
+  }
+
   ngOnInit(): void {
     this.mainService.getNewEventTitle().subscribe((val:string)=>{
       this.newEventTitle = val;
-    })
+    });
   }
 
 }
