@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { add } from 'ol/coordinate';
 import { EventObject } from '../services/interfaces';
 import { MainService } from '../services/main.service';
 import { ModalService } from '../services/modal.service';
@@ -11,13 +12,10 @@ import { ModalService } from '../services/modal.service';
 })
 export class NewEventModalComponent implements OnInit {
 
-  constructor(private modalService:ModalService, private mainService:MainService) {
-    this.loadGoogleMapsScriptPromise = new Promise((resolve) => {
-      this.loadGoogleMapsScript();
-      resolve(true);
-    });
-  }
+  constructor(private modalService:ModalService, private mainService:MainService) { }
 
+  addressUnparsed1 = '';
+  googleAddressHelper:string = '';
   loadGoogleMapsScriptPromise: Promise<any> = {} as Promise<any>;
   newEventTitle:string = '';
   newEventForm = new FormGroup({
@@ -39,6 +37,9 @@ export class NewEventModalComponent implements OnInit {
   });
 
   createNewEventInfoObject() {
+    const form = this.newEventForm;
+    const unparsedAddress = this.googleAddressHelper;
+    console.log(unparsedAddress)
     let address = {
       coordLat: 1,
       coordLng: 2,
@@ -48,7 +49,6 @@ export class NewEventModalComponent implements OnInit {
       zip: 'st',
     };
 
-    const form = this.newEventForm;
     let properties:Array<string> = [];
 
     if(form.get('eventTags')?.get('tagAlcohol')?.value) {
@@ -89,11 +89,19 @@ export class NewEventModalComponent implements OnInit {
       address: address
     };
 
-    console.log(form.get('eventTags')?.get('tagFreeEvent')?.value)
     return newEventInfoObject;
   };
 
-  onPostNewEvent() {
+  googleAddressHelperFunction(value:string) {
+    this.googleAddressHelper = value;
+  };
+
+  onPostIt(address:string) {
+    this.postNewEvent();
+    this.googleAddressHelperFunction(address);
+  };
+
+  postNewEvent() {
     const newEventInfoObject = this.createNewEventInfoObject();
     this.mainService.setNewEventInfo(newEventInfoObject);
     this.modalService.toggleModalById("postAsGuestModal");
@@ -103,22 +111,48 @@ export class NewEventModalComponent implements OnInit {
     this.modalService.toggleModalById("newEventModal");
   };
 
+  loadGoogleMapsAPI() {
+    if(!document.getElementById('mapsAPI')){
+      const mapsAPI = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCJc-yDaLOZIIjGIdYQgHLAyD2Kz8O-u7U&libraries=places&callback=initAutocomplete";
+      let node = document.createElement('script');
+      node.id = 'mapsAPI';
+      node.type = 'text/javascript';
+      node.async = true;
+      node.defer = true;
+      node.charset = 'utf-8';
+      node.src = mapsAPI;
+      document.getElementsByTagName('head')[0].appendChild(node);
+    };
+  };
+
   loadGoogleMapsScript() {
-    const mapsAPIScript = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCJc-yDaLOZIIjGIdYQgHLAyD2Kz8O-u7U&libraries=places&callback=initAutocomplete";
-    let node = document.createElement('script');
-    node.type = 'text/javascript';
-    node.async = true;
-    node.defer = true;
-    node.charset = 'utf-8';
-    node.innerHTML = "initAutocomplete = function(){console.log('AUTO')}"
-    node.src = mapsAPIScript;
-    document.getElementsByTagName('head')[0].appendChild(node);
-  }
+    if(!document.getElementById('mapsScript')){
+      const mapsScript = "function initAutocomplete() {new google.maps.places.Autocomplete((document.getElementById('autocomplete')), {types: ['geocode']});}";
+      let node = document.createElement('script');
+      node.id = 'mapsScript'
+      node.type = 'text/javascript';
+      node.async = true;
+      node.defer = true;
+      node.charset = 'utf-8';
+      node.innerHTML = mapsScript;
+      document.getElementsByTagName('head')[0].appendChild(node);
+    };
+
+    this.loadGoogleMapsAPI();
+  };
 
   ngOnInit(): void {
     this.mainService.getNewEventTitle().subscribe((val:string)=>{
       this.newEventTitle = val;
     });
-  }
 
+    this.modalService.toggleModal$.subscribe((val)=>{
+      if(val === 'newEventModal') {
+        this.loadGoogleMapsScriptPromise = new Promise((resolve) => {
+          this.loadGoogleMapsScript();
+          resolve(true);
+        });
+      }
+    })
+  }
 }
