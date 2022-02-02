@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { add } from 'ol/coordinate';
+import { Observable } from 'rxjs';
+import { HttpService } from '../services/http.service';
 import { EventObject } from '../services/interfaces';
 import { MainService } from '../services/main.service';
 import { ModalService } from '../services/modal.service';
@@ -12,9 +14,8 @@ import { ModalService } from '../services/modal.service';
 })
 export class NewEventModalComponent implements OnInit {
 
-  constructor(private modalService:ModalService, private mainService:MainService) { }
+  constructor(private modalService:ModalService, private mainService:MainService, private httpService:HttpService) { }
 
-  addressUnparsed1 = '';
   googleAddressHelper:string = '';
   loadGoogleMapsScriptPromise: Promise<any> = {} as Promise<any>;
   newEventTitle:string = '';
@@ -38,16 +39,8 @@ export class NewEventModalComponent implements OnInit {
 
   createNewEventInfoObject() {
     const form = this.newEventForm;
-    const unparsedAddress = this.googleAddressHelper;
-    console.log(unparsedAddress)
-    let address = {
-      coordLat: 1,
-      coordLng: 2,
-      city: 'sr',
-      state: 'st',
-      street: 'sr',
-      zip: 'st',
-    };
+
+    let address = this.getAddress();
 
     let properties:Array<string> = [];
 
@@ -92,13 +85,35 @@ export class NewEventModalComponent implements OnInit {
     return newEventInfoObject;
   };
 
+  getAddress() {
+    const unparsedAddress = this.googleAddressHelper;
+    let parsedAddress:Object = {};
+
+    this.httpService.getParsedAddress(unparsedAddress).subscribe(val=>{
+      console.log(val)
+      parsedAddress = val;
+    });
+
+    console.log('parsed', parsedAddress)
+
+    let address = {
+      coordLat: 1,
+      coordLng: 2,
+      city: 'sr',
+      state: 'st',
+      street: 'sr',
+      zip: 'st',
+    };
+    return (address);
+  }
+
   googleAddressHelperFunction(value:string) {
     this.googleAddressHelper = value;
   };
 
   onPostIt(address:string) {
-    this.postNewEvent();
     this.googleAddressHelperFunction(address);
+    this.postNewEvent();
   };
 
   postNewEvent() {

@@ -18,6 +18,12 @@ export class HttpService {
     return this.http.get<Array<EventObject>>(this.port + '/api/getAllEvents');
   };
 
+  getParsedAddress(unparsedAddress:string) {
+    console.log(unparsedAddress);
+    let googleAPIResponse = this.http.get<any>('https://maps.googleapis.com/maps/api/geocode/json?address=' + unparsedAddress + '&key=AIzaSyCJc-yDaLOZIIjGIdYQgHLAyD2Kz8O-u7U');
+    return googleAPIResponse
+  };
+
   postNewEvent(eventObject:EventObject): Observable<any> {
     const eventObjectStringify = JSON.stringify(eventObject);
     return this.http.post<any>(this.port + '/api/postNewEvent', eventObjectStringify, {'headers':this.headers})
