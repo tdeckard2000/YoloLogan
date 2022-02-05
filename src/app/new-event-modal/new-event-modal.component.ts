@@ -1,7 +1,7 @@
+import { compilePipeFromMetadata } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { add } from 'ol/coordinate';
-import { Observable } from 'rxjs';
 import { HttpService } from '../services/http.service';
 import { EventObject } from '../services/interfaces';
 import { MainService } from '../services/main.service';
@@ -16,9 +16,7 @@ export class NewEventModalComponent implements OnInit {
 
   constructor(private modalService:ModalService, private mainService:MainService, private httpService:HttpService) { }
 
-  googleAddressHelper:string = '';
   loadGoogleMapsScriptPromise: Promise<any> = {} as Promise<any>;
-  newEventTitle:string = '';
   newEventForm = new FormGroup({
     eventAddress: new FormControl(),
     eventDate: new FormControl(),
@@ -36,12 +34,41 @@ export class NewEventModalComponent implements OnInit {
     }),
     eventWebsite: new FormControl()
   });
+  newEventTitle:string = '';
 
-  createNewEventInfoObject() {
+  cleanUpAddress(googleParsedAddress:any) {
+    const coordinates = googleParsedAddress.results[0].geometry.location;
+    const addressComponentsArray = googleParsedAddress.results[0].address_components;
+
+    let address = {
+      coordLat: coordinates.lat,
+      coordLng: coordinates.lng,
+      city: '',
+      state: '',
+      streetNumber: '',
+      street: '',
+      zip: 'st',
+    };
+
+    addressComponentsArray.forEach((component:any) => {
+      if(component.types.includes('street_number')) {
+        address.streetNumber = component.long_name;
+      } else if(component.types.includes('route')) {
+        address.street = component.long_name;
+      } else if(component.types.includes('locality')) {
+        address.city = component.long_name;
+      } else if(component.types.includes('administrative_area_level_1')) {
+        address.state = component.short_name;
+      } else if(component.types.includes('postal_code')) {
+        address.zip = component.short_name;
+      };
+    });
+
+    return (address);
+  }
+
+  getProperties() {
     const form = this.newEventForm;
-
-    let address = this.getAddress();
-
     let properties:Array<string> = [];
 
     if(form.get('eventTags')?.get('tagAlcohol')?.value) {
@@ -72,54 +99,37 @@ export class NewEventModalComponent implements OnInit {
       properties.push('outdoors');
     };
 
+    return properties;
+  };
+
+  onPostIt(unparsedAddress:string) {
+    this.postNewEvent(unparsedAddress);
+  };
+
+  postNewEvent(unparsedAddress:string) {
+    const newEventInfoObject = this.prepareNewEventObject(unparsedAddress);
+    this.mainService.setNewEventInfo(newEventInfoObject);
+    this.modalService.toggleModalById("postAsGuestModal");
+  };
+
+  async prepareNewEventObject(unparsedAddress:string) {
+    const googleParsedAddress = await this.httpService.getParsedAddress(unparsedAddress).toPromise();
+    const cleanedAddress = this.cleanUpAddress(googleParsedAddress);
+    const properties = this.getProperties();
+
+    console.log(cleanedAddress);
+
     const newEventInfoObject:Partial<EventObject> = {
-      title: form.get('eventName')?.value,
-      date: form.get('eventDate')?.value,
-      description: form.get('eventDescription')?.value,
-      eventUrl: form.get('eventWebsite')?.value,
-      imageURL: form.get('eventImage')?.value,
+      title: this.newEventForm.get('eventName')?.value,
+      date: this.newEventForm.get('eventDate')?.value,
+      description: this.newEventForm.get('eventDescription')?.value,
+      eventUrl: this.newEventForm.get('eventWebsite')?.value,
+      imageURL: this.newEventForm.get('eventImage')?.value,
       properties: properties,
-      address: address
+      address: cleanedAddress
     };
 
     return newEventInfoObject;
-  };
-
-  getAddress() {
-    const unparsedAddress = this.googleAddressHelper;
-    let parsedAddress:Object = {};
-
-    this.httpService.getParsedAddress(unparsedAddress).subscribe(val=>{
-      console.log(val)
-      parsedAddress = val;
-    });
-
-    console.log('parsed', parsedAddress)
-
-    let address = {
-      coordLat: 1,
-      coordLng: 2,
-      city: 'sr',
-      state: 'st',
-      street: 'sr',
-      zip: 'st',
-    };
-    return (address);
-  }
-
-  googleAddressHelperFunction(value:string) {
-    this.googleAddressHelper = value;
-  };
-
-  onPostIt(address:string) {
-    this.googleAddressHelperFunction(address);
-    this.postNewEvent();
-  };
-
-  postNewEvent() {
-    const newEventInfoObject = this.createNewEventInfoObject();
-    this.mainService.setNewEventInfo(newEventInfoObject);
-    this.modalService.toggleModalById("postAsGuestModal");
   };
 
   onToggleNewEventModal() {

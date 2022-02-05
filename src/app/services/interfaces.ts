@@ -14,6 +14,7 @@ export interface EventObject {
     coordLng: number,
     city: string,
     state: string,
+    streetNumber: string,
     street: string,
     zip: string,
   };

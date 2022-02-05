@@ -49,7 +49,6 @@ export class PostAsGuestModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.mainService.getNewEventInfo().subscribe((val)=>{
-      console.log(val)
     });
   };
 

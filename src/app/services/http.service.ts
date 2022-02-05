@@ -2,6 +2,7 @@ import { Injectable, isDevMode} from '@angular/core';
 import { EventObject } from './interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { mapTo } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +20,8 @@ export class HttpService {
   };
 
   getParsedAddress(unparsedAddress:string) {
-    console.log(unparsedAddress);
     let googleAPIResponse = this.http.get<any>('https://maps.googleapis.com/maps/api/geocode/json?address=' + unparsedAddress + '&key=AIzaSyCJc-yDaLOZIIjGIdYQgHLAyD2Kz8O-u7U');
-    return googleAPIResponse
+    return googleAPIResponse;
   };
 
   postNewEvent(eventObject:EventObject): Observable<any> {
@@ -46,6 +46,7 @@ export class HttpService {
         coordLng: 41.727778,
         city: 'Logan',
         state: 'Utah',
+        streetNumber: '',
         street: '650 S 100 E',
         zip: '84321',
       }
@@ -66,6 +67,7 @@ export class HttpService {
         coordLng: 41.727778,
         city: 'Logan',
         state: 'Utah',
+        streetNumber: '',
         street: '650 S 100 E',
         zip: '84321',
       }
@@ -86,6 +88,7 @@ export class HttpService {
         coordLng: 41.727778,
         city: 'Logan',
         state: 'Utah',
+        streetNumber: '',
         street: '650 S 100 E',
         zip: '84321',
       }
@@ -106,6 +109,7 @@ export class HttpService {
         coordLng: 41.727778,
         city: 'Logan',
         state: 'Utah',
+        streetNumber: '',
         street: '119 Main St',
         zip: '84321',
       }
