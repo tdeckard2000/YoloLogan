@@ -1,9 +1,16 @@
-export interface EventObject {
+export interface ContactInfo {
+  business: string,
+  email: string,
+  phone: string,
+  firstName: string,
+  lastName: string,
+  hideEmail: boolean,
+  hidePhone: boolean,
+  hideName: boolean
+};
+
+export interface EventInfo {
   title: string,
-  businessName: string
-  contactEmail: string,
-  contactPhone: string,
-  contactName: string,
   date: Date,
   description: string,
   eventUrl: string,
@@ -17,8 +24,13 @@ export interface EventObject {
     streetNumber: string,
     street: string,
     zip: string,
-  };
+  },
+}
+
+export interface EventObject extends EventInfo{
+  contactInfo: ContactInfo
 };
+
 
 export interface FilterObject {
   kidFriendly: boolean,

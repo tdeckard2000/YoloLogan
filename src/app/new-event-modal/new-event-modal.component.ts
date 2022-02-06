@@ -1,9 +1,7 @@
-import { compilePipeFromMetadata } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { add } from 'ol/coordinate';
 import { HttpService } from '../services/http.service';
-import { EventObject } from '../services/interfaces';
+import { EventInfo } from '../services/interfaces';
 import { MainService } from '../services/main.service';
 import { ModalService } from '../services/modal.service';
 
@@ -106,20 +104,18 @@ export class NewEventModalComponent implements OnInit {
     this.postNewEvent(unparsedAddress);
   };
 
-  postNewEvent(unparsedAddress:string) {
-    const newEventInfoObject = this.prepareNewEventObject(unparsedAddress);
+  async postNewEvent(unparsedAddress:string) {
+    const newEventInfoObject = await this.prepareEventInfoObject(unparsedAddress);
     this.mainService.setNewEventInfo(newEventInfoObject);
     this.modalService.toggleModalById("postAsGuestModal");
   };
 
-  async prepareNewEventObject(unparsedAddress:string) {
+  async prepareEventInfoObject(unparsedAddress:string) {
     const googleParsedAddress = await this.httpService.getParsedAddress(unparsedAddress).toPromise();
     const cleanedAddress = this.cleanUpAddress(googleParsedAddress);
     const properties = this.getProperties();
 
-    console.log(cleanedAddress);
-
-    const newEventInfoObject:Partial<EventObject> = {
+    const newEventInfoObject:EventInfo = {
       title: this.newEventForm.get('eventName')?.value,
       date: this.newEventForm.get('eventDate')?.value,
       description: this.newEventForm.get('eventDescription')?.value,

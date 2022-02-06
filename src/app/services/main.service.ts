@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { EventObject } from './interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class MainService {
     this.mobileToolSelected$.next(buttonName);
   };
 
-  setNewEventInfo(newEventInfo:Object) {
+  setNewEventInfo(newEventInfo:Partial<EventObject>) {
     this.newEventInfo$.next(newEventInfo);
   };
 
