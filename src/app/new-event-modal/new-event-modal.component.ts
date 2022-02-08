@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../services/http.service';
 import { EventInfo } from '../services/interfaces';
 import { MainService } from '../services/main.service';
@@ -16,11 +16,11 @@ export class NewEventModalComponent implements OnInit {
 
   loadGoogleMapsScriptPromise: Promise<any> = {} as Promise<any>;
   newEventForm = new FormGroup({
-    eventAddress: new FormControl(),
-    eventDate: new FormControl(),
-    eventDescription: new FormControl(),
-    eventName: new FormControl(),
-    eventImage: new FormControl(),
+    eventAddress: new FormControl('',[Validators.required]),
+    eventDate: new FormControl('',[Validators.required]),
+    eventDescription: new FormControl('',[Validators.required]),
+    eventName: new FormControl('',[Validators.required]),
+    eventImage: new FormControl('',[Validators.required]),
     eventTags: new FormGroup({
       tagAlcohol: new FormControl(),
       tagCatFriendly: new FormControl(),
@@ -30,7 +30,7 @@ export class NewEventModalComponent implements OnInit {
       tagKidFriendly: new FormControl(),
       tagOutdoorsEvent: new FormControl(),
     }),
-    eventWebsite: new FormControl()
+    eventWebsite: new FormControl('',[Validators.required])
   });
   newEventTitle:string = '';
 

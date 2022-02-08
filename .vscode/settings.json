@@ -2,5 +2,6 @@
     "cSpell.words": [
         "MONGODB_CONNECTION_STRING",
         "Yolo"
-    ]
+    ],
+    "editor.fontLigatures": true
 }

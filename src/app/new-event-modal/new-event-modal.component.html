@@ -1,7 +1,7 @@
-<app-modal-wrapper [closeOnClickOut]="true" [modalTitle]="'New Logan Event'" id="newEventModal">
+<app-modal-wrapper [closeOnClickOut]="true" [modalTitle]="'New Logan Events'" id="newEventModal">
   <form class="newEventForm" [formGroup]="newEventForm">
     <label for="eventName">Title</label>
-    <input name="eventName" type="text" [(ngModel)]="newEventTitle" formControlName="eventName">
+    <input class="titleInput" name="eventName" type="text" [(ngModel)]="newEventTitle" formControlName="eventName">
 
     <label for="eventAddress">Address</label>
     <input class="addressInput" name="eventAddress" #eventAd type="text" formControlName="eventAddress" id="autocomplete">
