@@ -1,7 +1,3 @@
-.addressInput {
-  width: 300px;
-}
-
 input {
   border: 1px solid black;
   border-radius: 3px;
@@ -10,7 +6,7 @@ input {
   padding: 0 8px;
 
   &.ng-invalid.ng-dirty {
-    background-color: rgb(255, 174, 174);
+    background-color: rgb(255, 211, 211);
   }
 }
 
@@ -21,27 +17,57 @@ textArea {
   margin-bottom: 10px;
   padding: 8px;
   width: 300px;
+
+  &.ng-invalid.ng-dirty {
+    background-color: rgb(255, 211, 211);
+  }
+}
+
+.addressInput {
+  width: 300px;
 }
 
 .newEventForm {
-
   & label {
     display: block;
   }
+}
+
+.imageUploader {
+  border: none;
+  margin-top: 10px;
+  padding: 0;
 }
 
 .newEventModalButtons {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 30px;
   width: 100%;
 
   & button {
-    height: 30px;
-    width: 100px;
+    background-color: #4d4d4d;
+    border: 1px solid black;
+    border-radius: 3px;
+    color: white;
+    height: 35px;
+    width: 110px;
 
     &:hover {
       cursor: pointer;
+      background-color: #3a3a3a;
+    }
+
+    &:focus {
+      background-color: #4d4d4d;
+    }
+
+    &.inactive {
+      background-color: #979797;
+      &:hover {
+        cursor: default;
+      }
     }
   }
 }
@@ -49,8 +75,21 @@ textArea {
 .newEventTags {
   display: flex;
   flex-direction: row;
+
+  & .mat-checkbox {
+    margin: 0 5px;
+  }
 }
 
 .titleInput {
   width: 300px;
+}
+
+.userFeedback {
+  color: rgb(255, 110, 110);
+  margin-top: -8px;
+}
+
+::ng-deep .mat-checkbox-frame {
+  border: 1px solid black !important;
 }

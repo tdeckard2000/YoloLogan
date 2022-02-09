@@ -30,7 +30,7 @@ export class NewEventModalComponent implements OnInit {
       tagKidFriendly: new FormControl(),
       tagOutdoorsEvent: new FormControl(),
     }),
-    eventWebsite: new FormControl('',[Validators.required])
+    eventWebsite: new FormControl('')
   });
   newEventTitle:string = '';
 
@@ -101,7 +101,11 @@ export class NewEventModalComponent implements OnInit {
   };
 
   onPostIt(unparsedAddress:string) {
-    this.postNewEvent(unparsedAddress);
+    if(this.newEventForm.valid) {
+      this.postNewEvent(unparsedAddress);
+    } else {
+      console.warn("Form is not valid.")
+    }
   };
 
   async postNewEvent(unparsedAddress:string) {

@@ -2,18 +2,23 @@
   <form class="newEventForm" [formGroup]="newEventForm">
     <label for="eventName">Title</label>
     <input class="titleInput" name="eventName" type="text" [(ngModel)]="newEventTitle" formControlName="eventName">
+    <div class="userFeedback" *ngIf="newEventForm.controls['eventName'].invalid && newEventForm.controls['eventName'].dirty">*required</div>
 
     <label for="eventAddress">Address</label>
     <input class="addressInput" name="eventAddress" #eventAd type="text" formControlName="eventAddress" id="autocomplete">
+    <div class="userFeedback" *ngIf="newEventForm.controls['eventAddress'].invalid && newEventForm.controls['eventAddress'].dirty">*required</div>
 
     <label for="eventDescription">Description</label>
     <textarea name="eventDescription" id="" cols="50" rows="3" formControlName="eventDescription"></textarea>
+    <div class="userFeedback" *ngIf="newEventForm.controls['eventDescription'].invalid && newEventForm.controls['eventDescription'].dirty">*required</div>
 
     <label for="eventDate">Event Date</label>
     <input name="eventDate" type="date" formControlName="eventDate">
+    <div class="userFeedback" *ngIf="newEventForm.controls['eventDate'].invalid && newEventForm.controls['eventDate'].dirty">*required</div>
 
     <label for="eventImage">Image</label>
-    <input name="eventImage" type="file" formControlName="eventImage">
+    <input class="imageUploader" name="eventImage" type="file" formControlName="eventImage" id="eventImage" accept=".jpg, .jpeg, .png">
+    <div class="userFeedback" *ngIf="newEventForm.controls['eventImage'].invalid && newEventForm.controls['eventImage'].dirty">*required</div>
 
     <label for="eventWebsite">Website</label>
     <input name="eventWebsite" type="url" formControlName="eventWebsite">
@@ -35,6 +40,6 @@
 
   <div class="newEventModalButtons">
     <button (click)="onToggleNewEventModal()">Cancel</button>
-    <button (click)="onPostIt(eventAd.value)">Post It</button>
+    <button [ngClass]="{'inactive': newEventForm.invalid}" (click)="onPostIt(eventAd.value)">Post It</button>
   </div>
 </app-modal-wrapper>
