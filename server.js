@@ -4,9 +4,12 @@ const bodyParser = require('body-parser')
 const cors = require('cors');
 const path = require('path');
 const port = process.env.PORT || 3000;
+const request = require('request');
 const { MongoClient } = require("mongodb");
 const { EBADF } = require('constants');
 const { devNull } = require('os');
+const { urlencoded } = require('express');
+const { rejects } = require('assert');
 require('dotenv').config();
 
 const uri = process.env.MONGODB_CONNECTION_STRING;
@@ -33,6 +36,34 @@ res.sendFile(path.join(__dirname+'/dist/yoloLogan/index.html'));
 app.get('/api/getAllEvents', async (req, res)=>{
   const result = await db.collection('events').find().toArray();
   res.send(result)
+});
+
+app.post('/api/getAddressCoordinates', async (req, res)=>{
+  const city = req.body.city;
+  const state = req.body.state;
+  const street = req.body.street;
+  const fullAddress = street + ', ' + city + ', ' + state;
+  const requestURL = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=' + encodeURIComponent(fullAddress) + '&benchmark=2020&format=json';
+
+  coordinatesAPIRequest = new Promise ((resolve, reject)=>{
+    request(requestURL, (err, res, body)=>{
+      if(err) {
+        console.warn('geocodingError:' + err);
+      } else {
+        const data = JSON.parse(body);
+        let coordinates = {
+          coordLat: data.result.addressMatches[0].coordinates.y,
+          coordLng: data.result.addressMatches[0].coordinates.x,
+          zip: data.result.addressMatches[0].addressComponents.zip
+        };
+        resolve(coordinates);
+      };
+    });
+  });
+
+  const coordinates = await coordinatesAPIRequest;
+
+  res.send({coordinates});
 });
 
 app.post('/api/postNewEvent', async (req, res)=>{

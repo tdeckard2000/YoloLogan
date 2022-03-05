@@ -34,37 +34,6 @@ export class NewEventModalComponent implements OnInit {
   });
   newEventTitle:string = '';
 
-  cleanUpAddress(googleParsedAddress:any) {
-    const coordinates = googleParsedAddress.results[0].geometry.location;
-    const addressComponentsArray = googleParsedAddress.results[0].address_components;
-
-    let address = {
-      coordLat: coordinates.lat,
-      coordLng: coordinates.lng,
-      city: '',
-      state: '',
-      streetNumber: '',
-      street: '',
-      zip: 'st',
-    };
-
-    addressComponentsArray.forEach((component:any) => {
-      if(component.types.includes('street_number')) {
-        address.streetNumber = component.long_name;
-      } else if(component.types.includes('route')) {
-        address.street = component.long_name;
-      } else if(component.types.includes('locality')) {
-        address.city = component.long_name;
-      } else if(component.types.includes('administrative_area_level_1')) {
-        address.state = component.short_name;
-      } else if(component.types.includes('postal_code')) {
-        address.zip = component.short_name;
-      };
-    });
-
-    return (address);
-  }
-
   getProperties() {
     const form = this.newEventForm;
     let properties:Array<string> = [];
@@ -109,27 +78,41 @@ export class NewEventModalComponent implements OnInit {
   };
 
   async postNewEvent(unparsedAddress:string) {
-    const newEventInfoObject = await this.prepareEventInfoObject(unparsedAddress);
+    const newEventInfoObject = this.prepareEventInfoObject();
     this.mainService.setNewEventInfo(newEventInfoObject);
     this.modalService.toggleModalById("postAsGuestModal");
   };
 
-  async prepareEventInfoObject(unparsedAddress:string) {
-    const googleParsedAddress = await this.httpService.getParsedAddress(unparsedAddress).toPromise();
-    const cleanedAddress = this.cleanUpAddress(googleParsedAddress);
+  prepareEventInfoObject() {
+    const city = 'Bloomington'
+    const state = 'Indiana'
+    const street = '9201 W Elwren Rd'
     const properties = this.getProperties();
+    let test = {}
 
-    const newEventInfoObject:EventInfo = {
-      title: this.newEventForm.get('eventName')?.value,
-      date: this.newEventForm.get('eventDate')?.value,
-      description: this.newEventForm.get('eventDescription')?.value,
-      eventUrl: this.newEventForm.get('eventWebsite')?.value,
-      imageURL: this.newEventForm.get('eventImage')?.value,
-      properties: properties,
-      address: cleanedAddress
-    };
+    this.httpService.getAddressCoordinates(street, city, state).subscribe((data=>{
 
-    return newEventInfoObject;
+      const newEventInfoObject:EventInfo = {
+        title: this.newEventForm.get('eventName')?.value,
+        date: this.newEventForm.get('eventDate')?.value,
+        description: this.newEventForm.get('eventDescription')?.value,
+        eventUrl: this.newEventForm.get('eventWebsite')?.value,
+        imageURL: this.newEventForm.get('eventImage')?.value,
+        properties: properties,
+        address: {
+          coordLat: data.coordLat,
+          coordLng: data.coordLng,
+          city: city,
+          state: state,
+          streetNumber: '',
+          street: street,
+          zip: data.zip
+        }
+      };
+      console.log(newEventInfoObject)
+      return newEventInfoObject
+    }));
+    // return test;
   };
 
   onToggleNewEventModal() {
