@@ -79,7 +79,7 @@ export class NewEventModalComponent implements OnInit {
 
   async postNewEvent(unparsedAddress:string) {
     const newEventInfoObject = this.prepareEventInfoObject();
-    this.mainService.setNewEventInfo(newEventInfoObject);
+    // this.mainService.setNewEventInfo(newEventInfoObject);
     this.modalService.toggleModalById("postAsGuestModal");
   };
 
