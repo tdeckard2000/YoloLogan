@@ -42,10 +42,28 @@ app.post('/api/getAddressCoordinates', async (req, res)=>{
   const city = req.body.city;
   const state = req.body.state;
   const street = req.body.street;
-  const fullAddress = street + ', ' + city + ', ' + state;
-  const requestURL = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=' + encodeURIComponent(fullAddress) + '&benchmark=2020&format=json';
+  const coordinates = await getGeoCensusLocationsData(street, city, state);
+  console.log(coordinates)
+  res.send(coordinates);
+});
 
-  coordinatesAPIRequest = new Promise ((resolve, reject)=>{
+app.post('/api/postNewEvent', async (req, res)=>{
+  const newEventObject = req.body;
+  db.collection('events').insertOne(newEventObject, (err, val)=>{
+    if(err) {
+      console.warn("Error Posting: " + err)
+    } else {
+      res.send(val)
+    };
+  });
+});
+
+const getGeoCensusLocationsData = function(street, city, state) {
+  const fullAddress = street + ', ' + city + ', ' + state;
+  const requestURL = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address='
+  + encodeURIComponent(fullAddress) + '&benchmark=2020&format=json';
+
+  return new Promise((resolve, reject)=>{
     request(requestURL, (err, res, body)=>{
       if(err) {
         console.warn('geocodingError:' + err);
@@ -60,22 +78,7 @@ app.post('/api/getAddressCoordinates', async (req, res)=>{
       };
     });
   });
-
-  const coordinates = await coordinatesAPIRequest;
-
-  res.send({coordinates});
-});
-
-app.post('/api/postNewEvent', async (req, res)=>{
-  const newEventObject = req.body;
-  db.collection('events').insertOne(newEventObject, (err, val)=>{
-    if(err) {
-      console.warn("Error Posting: " + err)
-    } else {
-      res.send(val)
-    };
-  });
-});
+}
 
 app.listen(port, ()=>{
   console.warn("Listening on " + port);

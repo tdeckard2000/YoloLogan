@@ -14,7 +14,7 @@ export class NewEventModalComponent implements OnInit {
 
   constructor(private modalService:ModalService, private mainService:MainService, private httpService:HttpService) { }
 
-  loadGoogleMapsScriptPromise: Promise<any> = {} as Promise<any>;
+  // loadGoogleMapsScriptPromise: Promise<any> = {} as Promise<any>;
   newEventForm = new FormGroup({
     eventAddress: new FormControl('',[Validators.required]),
     eventDate: new FormControl('',[Validators.required]),
@@ -34,7 +34,7 @@ export class NewEventModalComponent implements OnInit {
   });
   newEventTitle:string = '';
 
-  getProperties() {
+  getEventProperties() {
     const form = this.newEventForm;
     let properties:Array<string> = [];
 
@@ -78,20 +78,12 @@ export class NewEventModalComponent implements OnInit {
   };
 
   async postNewEvent(unparsedAddress:string) {
-    const newEventInfoObject = this.prepareEventInfoObject();
-    // this.mainService.setNewEventInfo(newEventInfoObject);
-    this.modalService.toggleModalById("postAsGuestModal");
-  };
-
-  prepareEventInfoObject() {
     const city = 'Bloomington'
     const state = 'Indiana'
     const street = '9201 W Elwren Rd'
-    const properties = this.getProperties();
-    let test = {}
+    const properties = this.getEventProperties();
 
     this.httpService.getAddressCoordinates(street, city, state).subscribe((data=>{
-
       const newEventInfoObject:EventInfo = {
         title: this.newEventForm.get('eventName')?.value,
         date: this.newEventForm.get('eventDate')?.value,
@@ -109,58 +101,63 @@ export class NewEventModalComponent implements OnInit {
           zip: data.zip
         }
       };
+      console.log(data)
       console.log(newEventInfoObject)
-      return newEventInfoObject
+      this.mainService.setNewEventInfo(newEventInfoObject);
+      this.modalService.toggleModalById("postAsGuestModal");
     }));
-    // return test;
+  };
+
+  prepareEventInfoObject() {
+
   };
 
   onToggleNewEventModal() {
     this.modalService.toggleModalById("newEventModal");
   };
 
-  loadGoogleMapsAPI() {
-    if(!document.getElementById('mapsAPI')){
-      const mapsAPI = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCJc-yDaLOZIIjGIdYQgHLAyD2Kz8O-u7U&libraries=places&callback=initAutocomplete";
-      let node = document.createElement('script');
-      node.id = 'mapsAPI';
-      node.type = 'text/javascript';
-      node.async = true;
-      node.defer = true;
-      node.charset = 'utf-8';
-      node.src = mapsAPI;
-      document.getElementsByTagName('head')[0].appendChild(node);
-    };
-  };
+  // loadGoogleMapsAPI() {
+  //   if(!document.getElementById('mapsAPI')){
+  //     const mapsAPI = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCJc-yDaLOZIIjGIdYQgHLAyD2Kz8O-u7U&libraries=places&callback=initAutocomplete";
+  //     let node = document.createElement('script');
+  //     node.id = 'mapsAPI';
+  //     node.type = 'text/javascript';
+  //     node.async = true;
+  //     node.defer = true;
+  //     node.charset = 'utf-8';
+  //     node.src = mapsAPI;
+  //     document.getElementsByTagName('head')[0].appendChild(node);
+  //   };
+  // };
 
-  loadGoogleMapsScript() {
-    if(!document.getElementById('mapsScript')){
-      const mapsScript = "function initAutocomplete() {new google.maps.places.Autocomplete((document.getElementById('autocomplete')), {types: ['geocode']});}";
-      let node = document.createElement('script');
-      node.id = 'mapsScript'
-      node.type = 'text/javascript';
-      node.async = true;
-      node.defer = true;
-      node.charset = 'utf-8';
-      node.innerHTML = mapsScript;
-      document.getElementsByTagName('head')[0].appendChild(node);
-    };
+  // loadGoogleMapsScript() {
+  //   if(!document.getElementById('mapsScript')){
+  //     const mapsScript = "function initAutocomplete() {new google.maps.places.Autocomplete((document.getElementById('autocomplete')), {types: ['geocode']});}";
+  //     let node = document.createElement('script');
+  //     node.id = 'mapsScript'
+  //     node.type = 'text/javascript';
+  //     node.async = true;
+  //     node.defer = true;
+  //     node.charset = 'utf-8';
+  //     node.innerHTML = mapsScript;
+  //     document.getElementsByTagName('head')[0].appendChild(node);
+  //   };
 
-    this.loadGoogleMapsAPI();
-  };
+  //   this.loadGoogleMapsAPI();
+  // };
 
   ngOnInit(): void {
     this.mainService.getNewEventTitle().subscribe((val:string)=>{
       this.newEventTitle = val;
     });
 
-    this.modalService.toggleModal$.subscribe((val)=>{
-      if(val === 'newEventModal') {
-        this.loadGoogleMapsScriptPromise = new Promise((resolve) => {
-          this.loadGoogleMapsScript();
-          resolve(true);
-        });
-      }
-    })
+    // this.modalService.toggleModal$.subscribe((val)=>{
+    //   if(val === 'newEventModal') {
+    //     this.loadGoogleMapsScriptPromise = new Promise((resolve) => {
+    //       this.loadGoogleMapsScript();
+    //       resolve(true);
+    //     });
+    //   }
+    // }); ** Goodbye, Google. You cost more than $0 which is too rich for my blood **
   }
 }
