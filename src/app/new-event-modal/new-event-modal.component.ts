@@ -16,7 +16,8 @@ export class NewEventModalComponent implements OnInit {
 
   // loadGoogleMapsScriptPromise: Promise<any> = {} as Promise<any>;
   newEventForm = new FormGroup({
-    eventAddress: new FormControl('',[Validators.required]),
+    eventCity: new FormControl('', [Validators.required]),
+    eventStreet: new FormControl('',[Validators.required]),
     eventDate: new FormControl('',[Validators.required]),
     eventDescription: new FormControl('',[Validators.required]),
     eventName: new FormControl('',[Validators.required]),
@@ -69,18 +70,18 @@ export class NewEventModalComponent implements OnInit {
     return properties;
   };
 
-  onPostIt(unparsedAddress:string) {
+  onPostIt() {
     if(this.newEventForm.valid) {
-      this.postNewEvent(unparsedAddress);
+      this.postNewEvent();
     } else {
       console.warn("Form is not valid.")
     }
   };
 
-  async postNewEvent(unparsedAddress:string) {
-    const city = 'Bloomington'
-    const state = 'Indiana'
-    const street = '9201 W Elwren Rd'
+  async postNewEvent() {
+    const city = this.newEventForm.get('eventCity')?.value;
+    const state = 'Utah'
+    const street = this.newEventForm.get('eventStreet')?.value;
     const properties = this.getEventProperties();
 
     this.httpService.getAddressCoordinates(street, city, state).subscribe((data=>{
@@ -101,7 +102,6 @@ export class NewEventModalComponent implements OnInit {
           zip: data.zip
         }
       };
-      console.log(data)
       console.log(newEventInfoObject)
       this.mainService.setNewEventInfo(newEventInfoObject);
       this.modalService.toggleModalById("postAsGuestModal");

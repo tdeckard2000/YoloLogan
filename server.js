@@ -68,11 +68,20 @@ const getGeoCensusLocationsData = function(street, city, state) {
       if(err) {
         console.warn('geocodingError:' + err);
       } else {
+        let coordinates = {};
         const data = JSON.parse(body);
-        let coordinates = {
-          coordLat: data.result.addressMatches[0].coordinates.y,
-          coordLng: data.result.addressMatches[0].coordinates.x,
-          zip: data.result.addressMatches[0].addressComponents.zip
+        if(data.result.addressMatches[0]) {
+          coordinates = {
+            coordLat: data.result.addressMatches[0].coordinates.y,
+            coordLng: data.result.addressMatches[0].coordinates.x,
+            zip: data.result.addressMatches[0].addressComponents.zip
+          };
+        } else {
+          coordinates = {
+            coordLat: 0,
+            coordLng: 0,
+            zip: 0
+          };
         };
         resolve(coordinates);
       };
