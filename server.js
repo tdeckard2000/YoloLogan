@@ -34,6 +34,21 @@ app.get('/api/getAllEvents', async (req, res)=>{
   res.send(result)
 });
 
+app.post('/api/getFilteredEvents', async (req, res)=>{
+  console.log(req.body)
+  const searchString = req.body.searchString;
+  const filters = req.body.filters;
+  const result = await db.collection('events').find({$or:
+      [
+        {"title": {$regex: searchString, '$options': 'i'}},
+        {"description": {$regex: searchString, '$options': 'i'}},
+        {"contactInfo.firstName": {$regex: searchString, '$options': 'i'}},
+        {"contactInfo.lastName": {$regex: searchString, '$options': 'i'}},
+      ]
+    }).toArray();
+  res.send(result);
+});
+
 app.post('/api/getAddressCoordinates', async (req, res)=>{
   const city = req.body.city;
   const state = req.body.state;
@@ -45,9 +60,6 @@ app.post('/api/getAddressCoordinates', async (req, res)=>{
 
 app.post('/api/postNewEvent', async (req, res)=>{
   const newEvent = req.body;
-
-  console.log(newEvent)
-
   db.collection('events').insertOne(newEvent, (err, val)=>{
     if(err) {
       console.warn("Error Posting: " + err)
