@@ -14,11 +14,10 @@
         <mat-button-toggle class="pageToggleButton" value="eventsAndGroups" checked="true">Events & Groups</mat-button-toggle>
         <mat-button-toggle class="pageToggleButton" value="communityResources">Community Resources</mat-button-toggle>
       </mat-button-toggle-group>
-      <!-- <p class="pageTitle">Local Events & Groups</p>
-      <p>Get out on the town!</p> -->
     </div>
     <div class="col2">
       <input id="searchBar" [(ngModel)]="searchString" (keyup)="onSearchString()" type="text">
+      <button (click)="onSearchClick()" class="searchButton"></button>
     </div>
   </div>
   <div id="mediaMobileToolToggles" class="mobileButtonToggles">

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { EventObject } from './interfaces';
 
 @Injectable({
@@ -15,8 +16,9 @@ export class MainService {
   private mobileToolSelected$ = new BehaviorSubject('main');
   private newEventTitle$:Subject<string> = new Subject();
   private searchString$:BehaviorSubject<string> = new BehaviorSubject('');
+  private searchButtonClicked$:Subject<boolean> = new Subject();
 
-  setMobileToolSelected(buttonName:string){
+  setMobileToolSelected(buttonName:string) {
     this.mobileToolSelected$.next(buttonName);
   };
 
@@ -30,6 +32,10 @@ export class MainService {
 
   setNewEventUserInfo(newEventUserInfo:Object) {
     this.newEventUserInfo$.next(newEventUserInfo);
+  };
+
+  setSearchButtonClick() {
+    this.searchButtonClicked$.next(true);
   };
 
   setSearchString(newSearch:string) {
@@ -48,14 +54,17 @@ export class MainService {
 
   getNewEventTitle() {
     return this.newEventTitle$.asObservable();
-  }
+  };
 
   getNewEventUserInfo() {
     return this.newEventUserInfo$.asObservable();
-  }
+  };
+
+  getSearchButtonClick() {
+    return this.searchButtonClicked$.asObservable();
+  };
 
   getSearchString() {
     return this.searchString$.asObservable();
   };
-
 }

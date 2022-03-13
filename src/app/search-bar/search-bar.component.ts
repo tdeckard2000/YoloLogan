@@ -16,6 +16,10 @@ export class SearchBarComponent implements OnInit {
   searchString = '';
   mobileToolSelected = 'main';
 
+  onSearchClick() {
+    this.mainService.setSearchButtonClick();
+  };
+
   onMobileToolToggle(buttonName:string){
     if(buttonName === this.mobileToolSelected){
       this.mobileToolSelected = 'main';

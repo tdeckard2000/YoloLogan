@@ -4,7 +4,7 @@
   </div>
   <div class="columnRight">
     <h2 [innerHTML]="tileData.title | highlightText:searchString"></h2>
-    <p> Hosted by: <span [innerHTML]="tileData.contactInfo.firstName + '' + tileData.contactInfo.lastName | highlightText:searchString"></span>
+    <p> Hosted by: <span [innerHTML]="tileData.contactInfo.firstName + ' ' + tileData.contactInfo.lastName | highlightText:searchString"></span>
     <span *ngIf="tileData.contactInfo.business" [innerHTML]="', ' + tileData.contactInfo.business | highlightText:searchString"></span></p>
 
     <p>{{tileData.address.street + ' ' + tileData.address.city + ', ' + tileData.address.state + ' ' + tileData.address.zip}}
