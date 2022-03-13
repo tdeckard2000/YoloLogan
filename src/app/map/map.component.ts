@@ -21,62 +21,57 @@ export class MapComponent implements OnInit {
 
   loganLonLat = [-111.830833, 41.737778];
   loganWebMercator = fromLonLat(this.loganLonLat);
+  mainLayer = new TileLayer({source: new OSM()});
   map = {} as Map;
 
-  ngOnInit(): void {
-    this.map = new Map({
-      view: new View({
-        // center: fromLonLat([41.7370, 111.8338]),
-        center: this.loganWebMercator,
-        zoom: 12,
-      }),
-      target: 'ol-map'
-    });
-
-    let mainLayer = new TileLayer({
-      source: new OSM()
-    });
-
-    const rome = new Feature({
+  placeCoordinatesOnMap() {
+    const mapPin = new Feature({
       geometry: new Point(fromLonLat([-111.880100, 41.727778])),
-      name: 'Rome'
+      name: 'mapPin'
     });
 
-    rome.setStyle([
+    mapPin.setStyle([
       new Style({
         image: new Icon({
           color: 'white',
           crossOrigin: 'anonymous',
-          // For Internet Explorer 11
           imgSize: [25, 25],
           src: 'assets/images/map-pin3.svg',
         })
       }),
       new Style({
-        text: new Text({
-          // backgroundFill: new Fill({
-          //   color: 'white'
-          // }),
-          fill: new Fill({color: 'black'}),
-          font: 'bold 12px sans-serif',
-          offsetX: -60,
-          offsetY: 2.5,
-          // padding: [2, 2, 2, 2],
-          stroke: new Stroke({color: 'white', width: 5}),
-          text: 'Volunteer Day..',
-        })
+          text: new Text({
+            fill: new Fill({color: 'black'}),
+            font: 'bold 12px sans-serif',
+            offsetX: -60,
+            offsetY: 2.5,
+            stroke: new Stroke({color: 'white', width: 5}),
+            text: 'Volunteer Day..',
+          })
         })
     ]);
 
     const vectorSource = new VectorSource({
-      features: [rome]
+      features: [mapPin]
     });
 
     const vectorLayer = new VectorLayer({
       source: vectorSource
     });
 
-    this.map.addLayer(mainLayer);
     this.map.addLayer(vectorLayer);
+  }
+
+  ngOnInit(): void {
+    this.map = new Map({
+      view: new View({
+        center: this.loganWebMercator,
+        zoom: 11,
+      }),
+      target: 'ol-map'
+    });
+
+    this.map.addLayer(this.mainLayer);
+    this.placeCoordinatesOnMap();
   }
 }

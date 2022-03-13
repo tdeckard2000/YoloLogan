@@ -1,5 +1,5 @@
 import { Injectable, isDevMode} from '@angular/core';
-import { EventObject } from './interfaces';
+import { ContactInfo, EventObject } from './interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { mapTo } from 'rxjs/operators'
@@ -23,9 +23,21 @@ export class HttpService {
     return this.http.post<any>(this.port + '/api/getAddressCoordinates', {'street': street, 'city': city, 'state': state}, {'headers':this.headers});
   };
 
-  postNewEvent(eventObject:EventObject): Observable<any> {
-    const eventObjectStringify = JSON.stringify(eventObject);
-    return this.http.post<any>(this.port + '/api/postNewEvent', eventObjectStringify, {'headers':this.headers})
+  postNewEvent(contactObject:ContactInfo, eventObject:EventObject): Observable<any> {
+    const newEvent =  {
+      title: eventObject.title,
+      date: eventObject.date,
+      description: eventObject.description,
+      eventUrl: eventObject.imageURL,
+      imageURL: eventObject.imageURL,
+      properties: eventObject.properties,
+      address: eventObject.address,
+      contactInfo: eventObject.contactInfo
+    }
+
+    const newEventObject = JSON.stringify(newEvent);
+
+    return this.http.post<any>(this.port + '/api/postNewEvent', newEvent, {'headers':this.headers})
   };
 
 }

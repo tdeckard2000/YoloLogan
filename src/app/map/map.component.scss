@@ -5,6 +5,7 @@
 }
 
 .map-container {
+  filter: saturate(1.5);
   height: calc(100% - 150px);
   overflow: visible;
   position: fixed;

@@ -1,6 +1,6 @@
 <div class="containerMain">
   <div class="columnLeft">
-    <img src="{{tileData.imageURL}}" alt="Image Of Event">
+    <img src="{{tileData.imageURL? tileData.imageURL : 'assets/images/imgPlaceHolder.png'}}" alt="Image Of Event">
   </div>
   <div class="columnRight">
     <h2 [innerHTML]="tileData.title | highlightText:searchString"></h2>

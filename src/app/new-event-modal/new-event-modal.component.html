@@ -1,14 +1,17 @@
 <app-modal-wrapper [closeOnClickOut]="true" [modalTitle]="'New Logan Events'" id="newEventModal">
   <form class="newEventForm" [formGroup]="newEventForm">
-    <label for="eventName">Title</label>
+    <label for="eventName">Title *</label>
     <input class="titleInput" name="eventName" type="text" [(ngModel)]="newEventTitle" formControlName="eventName">
     <div class="userFeedback" *ngIf="newEventForm.controls['eventName'].invalid && newEventForm.controls['eventName'].dirty">*required</div>
 
-    <label for="eventStreet">Street</label>
+    <label for="eventStreet">Street *</label>
     <input class="streetInput" name="eventStreet" type="text" formControlName="eventStreet" id="autocomplete">
     <div class="userFeedback" *ngIf="newEventForm.controls['eventStreet'].invalid && newEventForm.controls['eventStreet'].dirty">*required</div>
 
-    <label for="eventStreet">City</label>
+    <label for="eventSuite">Suite/Apt (optional)</label>
+    <input class="streetInput" name="eventSuite" type="text" formControlName="eventSuite" id="autocomplete">
+
+    <label for="eventStreet">City *</label>
     <select class="cityInput" name="eventCity" type="text" formControlName="eventCity" id="autocomplete" type="">
       <option value="Logan">Logan</option>
       <option value="North Logan">North Logan</option>
@@ -20,14 +23,11 @@
     </select>
     <div class="userFeedback" *ngIf="newEventForm.controls['eventCity'].invalid && newEventForm.controls['eventCity'].dirty">*required</div>
 
-    <label for="eventSuite">Suite/Apt (optional)</label>
-    <input class="streetInput" name="eventSuite" type="text" formControlName="eventSuite" id="autocomplete">
-
     <label for="eventDescription">Description</label>
     <textarea name="eventDescription" id="" cols="50" rows="3" formControlName="eventDescription"></textarea>
     <div class="userFeedback" *ngIf="newEventForm.controls['eventDescription'].invalid && newEventForm.controls['eventDescription'].dirty">*required</div>
 
-    <label for="eventDate">Event Date</label>
+    <label for="eventDate">Event Date *</label>
     <input name="eventDate" type="date" formControlName="eventDate">
     <div class="userFeedback" *ngIf="newEventForm.controls['eventDate'].invalid && newEventForm.controls['eventDate'].dirty">*required</div>
 

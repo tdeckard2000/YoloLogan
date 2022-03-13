@@ -65,7 +65,7 @@ export class PostAsGuestModalComponent implements OnInit {
     const contactInfoObject = this.prepareContactInfoObject();
     const newEventObject = this.combineEventObjects(contactInfoObject, this.eventInfoObject);
 
-    this.httpService.postNewEvent(newEventObject).subscribe((val:any)=>{
+    this.httpService.postNewEvent(contactInfoObject, newEventObject).subscribe((val:any)=>{
       const successful = val.acknowledged;
       if(successful) {
         this.modalService.toggleModalById('successfulPostModal');

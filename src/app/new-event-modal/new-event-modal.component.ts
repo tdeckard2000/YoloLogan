@@ -19,9 +19,9 @@ export class NewEventModalComponent implements OnInit {
     eventCity: new FormControl('', [Validators.required]),
     eventStreet: new FormControl('',[Validators.required]),
     eventDate: new FormControl('',[Validators.required]),
-    eventDescription: new FormControl('',[Validators.required]),
+    eventDescription: new FormControl(),
     eventName: new FormControl('',[Validators.required]),
-    eventImage: new FormControl('',[Validators.required]),
+    eventImage: new FormControl(),
     eventTags: new FormGroup({
       tagAlcohol: new FormControl(),
       tagCatFriendly: new FormControl(),
@@ -102,7 +102,7 @@ export class NewEventModalComponent implements OnInit {
           zip: data.zip
         }
       };
-      console.log(newEventInfoObject)
+
       this.mainService.setNewEventInfo(newEventInfoObject);
       this.modalService.toggleModalById("postAsGuestModal");
     }));

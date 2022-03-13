@@ -6,10 +6,6 @@ const path = require('path');
 const port = process.env.PORT || 3000;
 const request = require('request');
 const { MongoClient } = require("mongodb");
-const { EBADF } = require('constants');
-const { devNull } = require('os');
-const { urlencoded } = require('express');
-const { rejects } = require('assert');
 require('dotenv').config();
 
 const uri = process.env.MONGODB_CONNECTION_STRING;
@@ -48,8 +44,11 @@ app.post('/api/getAddressCoordinates', async (req, res)=>{
 });
 
 app.post('/api/postNewEvent', async (req, res)=>{
-  const newEventObject = req.body;
-  db.collection('events').insertOne(newEventObject, (err, val)=>{
+  const newEvent = req.body;
+
+  console.log(newEvent)
+
+  db.collection('events').insertOne(newEvent, (err, val)=>{
     if(err) {
       console.warn("Error Posting: " + err)
     } else {
