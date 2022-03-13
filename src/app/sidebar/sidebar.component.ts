@@ -35,7 +35,7 @@ export class SidebarComponent implements OnInit {
   };
 
   checkboxFilters: FormGroup = {} as FormGroup;
-  exampleData: Array<EventObject> = [] as Array<EventObject>;
+  events: Array<EventObject> = [] as Array<EventObject>;
   isMobileDisplay:boolean = false;
   mobileToolSelected = 'main';
   newEventTitle = '';
@@ -67,7 +67,7 @@ export class SidebarComponent implements OnInit {
     });
 
     this.httpService.getAllEvents().subscribe((data)=>{
-      this.exampleData = data;
+      this.events = data;
     });
 
   }
