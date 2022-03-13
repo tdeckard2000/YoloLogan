@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { MainService } from '../services/main.service';
+import { BreakpointState} from '@angular/cdk/layout';
 import { WindowSizeService } from '../services/window-size.service';
 
 @Component({
@@ -11,8 +12,9 @@ export class SearchBarComponent implements OnInit {
 
   @Output() searchStringEmitter = new EventEmitter();
 
-  constructor(private mainService:MainService) { }
+  constructor(private mainService:MainService, private windowSize:WindowSizeService) { }
 
+  isMobileDisplay:boolean = false;
   searchString = '';
   mobileToolSelected = 'main';
 
@@ -37,7 +39,9 @@ export class SearchBarComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.windowSize.getIsMobile().subscribe((result:BreakpointState)=>{
+      this.isMobileDisplay = result.matches;
+    });
   }
 
 }

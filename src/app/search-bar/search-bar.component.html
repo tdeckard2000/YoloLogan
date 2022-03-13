@@ -16,8 +16,8 @@
       </mat-button-toggle-group>
     </div>
     <div class="col2">
-      <input id="searchBar" [(ngModel)]="searchString" (keyup)="onSearchString()" type="text">
-      <button (click)="onSearchClick()" class="searchButton"></button>
+        <input (keyup.enter)="onSearchClick()" id="searchBar" [(ngModel)]="searchString" (keyup)="onSearchString()" type="text">
+        <button *ngIf="!isMobileDisplay" (click)="onSearchClick()" class="searchButton"></button>
     </div>
   </div>
   <div id="mediaMobileToolToggles" class="mobileButtonToggles">
