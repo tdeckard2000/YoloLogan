@@ -1,6 +1,8 @@
 import { BreakpointState} from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { Filter } from 'mongodb';
+import { filter } from 'rxjs/operators';
 import { HttpService } from '../services/http.service';
 import { EventObject, FilterObject } from '../services/interfaces';
 import { MainService } from '../services/main.service';
@@ -43,7 +45,7 @@ export class SidebarComponent implements OnInit {
   searchString:string = '';
   sidePanelIsOpen = true;
 
-  filterResults(searchString: string, filters: FilterObject) {
+  getFilteredEvents(searchString: string, filters: FilterObject) {
     this.httpService.getFilteredEvents(searchString, filters).subscribe((data)=>{
       this.events = data;
     });
@@ -74,29 +76,21 @@ export class SidebarComponent implements OnInit {
 
     this.mainService.getSearchButtonClick().subscribe((result: boolean)=>{
       if(result) {
-        const filters = {
-          kidFriendly: false,
-          adultsOnly: true,
-          freeEvent: true,
-          paidEvent: false,
-          oneTimeEvent: false,
-          weeklyEvent: false,
-          monthlyEvent: false,
-          dogFriendly: true,
-          catFriendly: true,
-          coffee: true,
-          noCoffee: false,
-          alcohol: false,
-          noAlcohol: false,
-          outdoors: true,
-          indoors: true
-        };
-        this.filterResults(this.searchString, filters);
+        const filters:FilterObject = this.checkboxFilters.getRawValue();
+        this.getFilteredEvents(this.searchString, filters);
       }
     });
 
     this.httpService.getAllEvents().subscribe((result: Array<EventObject>)=>{
       this.events = result;
+    });
+
+    this.checkboxFilters.valueChanges.subscribe((result)=>{
+      if(result) {
+        const filterSelections = result;
+        this.mainService.setFilterSelections(result);
+        this.getFilteredEvents(this.searchString, filterSelections);
+      };
     });
 
   }
