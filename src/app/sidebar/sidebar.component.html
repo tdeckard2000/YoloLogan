@@ -42,7 +42,8 @@
       <app-event-tile *ngFor="let event of events" [tileData] = "event" [searchString]="searchString"></app-event-tile>
     </div>
     <div>
-      <app-map *ngIf="(!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'map')"></app-map>
+      <!-- <app-map *ngIf="(!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'map')"></app-map> -->
+      <app-map [ngStyle]="{'display': (!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'map') ? 'initial':'none'}"></app-map>
     </div>
   </mat-drawer-content>
 

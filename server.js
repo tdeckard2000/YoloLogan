@@ -83,7 +83,6 @@ app.post('/api/getFilteredEvents', async (req, res)=>{
       ]).toArray();
 
   } else if(mustMatchFilters.length <= 0 && mustNotMatchFilters.length > 0) {
-    console.log(mustNotMatchFilters)
     result = await db.collection("events").aggregate([
       {
         $match: {
