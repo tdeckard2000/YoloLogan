@@ -53,6 +53,7 @@ app.post('/api/getFilteredEvents', async (req, res)=>{
               {"description": {$regex: searchString, '$options': 'i'}},
               {"contactInfo.firstName": {$regex: searchString, '$options': 'i'}},
               {"contactInfo.lastName": {$regex: searchString, '$options': 'i'}},
+              {"contactInfo.business": {$regex: searchString, '$options': 'i'}},
             ]
         }
       }
@@ -68,6 +69,7 @@ app.post('/api/getFilteredEvents', async (req, res)=>{
                 {"description": {$regex: searchString, '$options': 'i'}},
                 {"contactInfo.firstName": {$regex: searchString, '$options': 'i'}},
                 {"contactInfo.lastName": {$regex: searchString, '$options': 'i'}},
+                {"contactInfo.business": {$regex: searchString, '$options': 'i'}},
               ]
           }
         },
@@ -81,6 +83,7 @@ app.post('/api/getFilteredEvents', async (req, res)=>{
       ]).toArray();
 
   } else if(mustMatchFilters.length <= 0 && mustNotMatchFilters.length > 0) {
+    console.log(mustNotMatchFilters)
     result = await db.collection("events").aggregate([
       {
         $match: {
@@ -90,6 +93,7 @@ app.post('/api/getFilteredEvents', async (req, res)=>{
               {"description": {$regex: searchString, '$options': 'i'}},
               {"contactInfo.firstName": {$regex: searchString, '$options': 'i'}},
               {"contactInfo.lastName": {$regex: searchString, '$options': 'i'}},
+              {"contactInfo.business": {$regex: searchString, '$options': 'i'}},
             ]
         }
       },
@@ -112,6 +116,7 @@ app.post('/api/getFilteredEvents', async (req, res)=>{
               {"description": {$regex: searchString, '$options': 'i'}},
               {"contactInfo.firstName": {$regex: searchString, '$options': 'i'}},
               {"contactInfo.lastName": {$regex: searchString, '$options': 'i'}},
+              {"contactInfo.business": {$regex: searchString, '$options': 'i'}},
             ]
         }
       },
@@ -220,9 +225,9 @@ const prepareFilterSelections = function(filterSelections) {
           mustNotMatchFilters.push("alcohol");
       } else if(filter === "outdoors") {
           mustMatchFilters.push("outdoors");
-          mustNotMatchFilters.push("indoors");
+          // mustNotMatchFilters.push("indoors");
       } else if(filter === "indoors") {
-          mustMatchFilters.push("indoors");
+          // mustMatchFilters.push("indoors");
           mustNotMatchFilters.push("outdoors");
       };
     };

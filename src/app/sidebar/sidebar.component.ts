@@ -1,4 +1,5 @@
 import { BreakpointState} from '@angular/cdk/layout';
+import { resolve } from '@angular/compiler-cli/src/ngtsc/file_system';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { Filter } from 'mongodb';
@@ -46,8 +47,9 @@ export class SidebarComponent implements OnInit {
   sidePanelIsOpen = true;
 
   getFilteredEvents(searchString: string, filters: FilterObject) {
-    this.httpService.getFilteredEvents(searchString, filters).subscribe((data)=>{
-      this.events = data;
+    this.httpService.updateFilteredEvents(searchString, filters);
+    this.httpService.getFilteredEvents().subscribe(results => {
+      this.events = results;
     });
   }
 
@@ -81,8 +83,10 @@ export class SidebarComponent implements OnInit {
       }
     });
 
-    this.httpService.getAllEvents().subscribe((result: Array<EventObject>)=>{
-      this.events = result;
+    this.httpService.updateAllEvents();
+
+    this.httpService.getAllEvents().subscribe(results => {
+      this.events = results;
     });
 
     this.checkboxFilters.valueChanges.subscribe((result)=>{

@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 export interface ContactInfo {
   business: string,
   email: string,
@@ -28,6 +30,7 @@ export interface EventInfo {
 }
 
 export interface EventObject extends EventInfo{
+  _id: ObjectId
   contactInfo: ContactInfo
 };
 

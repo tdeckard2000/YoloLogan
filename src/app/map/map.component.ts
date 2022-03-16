@@ -9,6 +9,10 @@ import Point from 'ol/geom/Point';
 import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
 import {Fill, Icon, Stroke, Style, Text} from 'ol/style';
+import { HttpService } from '../services/http.service';
+import { EventObject } from '../services/interfaces';
+import { ObjectId } from 'mongodb';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-map',
@@ -17,52 +21,15 @@ import {Fill, Icon, Stroke, Style, Text} from 'ol/style';
 })
 export class MapComponent implements OnInit {
 
-  constructor() { }
+  constructor(private httpService:HttpService) { }
 
+  filteredEvents: Array<EventObject> = []
   loganLonLat = [-111.830833, 41.737778];
   loganWebMercator = fromLonLat(this.loganLonLat);
   mainLayer = new TileLayer({source: new OSM()});
   map = {} as Map;
 
-  placeCoordinatesOnMap() {
-    const mapPin = new Feature({
-      geometry: new Point(fromLonLat([-111.880100, 41.727778])),
-      name: 'mapPin'
-    });
-
-    mapPin.setStyle([
-      new Style({
-        image: new Icon({
-          color: 'white',
-          crossOrigin: 'anonymous',
-          imgSize: [25, 25],
-          src: 'assets/images/map-pin3.svg',
-        })
-      }),
-      new Style({
-          text: new Text({
-            fill: new Fill({color: 'black'}),
-            font: 'bold 12px sans-serif',
-            offsetX: -60,
-            offsetY: 2.5,
-            stroke: new Stroke({color: 'white', width: 5}),
-            text: 'Volunteer Day..',
-          })
-        })
-    ]);
-
-    const vectorSource = new VectorSource({
-      features: [mapPin]
-    });
-
-    const vectorLayer = new VectorLayer({
-      source: vectorSource
-    });
-
-    this.map.addLayer(vectorLayer);
-  }
-
-  ngOnInit(): void {
+  initializeMap() {
     this.map = new Map({
       view: new View({
         center: this.loganWebMercator,
@@ -70,8 +37,74 @@ export class MapComponent implements OnInit {
       }),
       target: 'ol-map'
     });
-
     this.map.addLayer(this.mainLayer);
-    this.placeCoordinatesOnMap();
+  };
+
+  prepareLocationsForMap(events:Array<EventObject>) {
+    let locationsArray:Array<Feature<Point>> = [];
+    for(let i = 0; i < events.length; i++) {
+      const coordinatesLat = events[i].address.coordLat;
+      const coordinatesLng = events[i].address.coordLng;
+      const eventTitle = events[i].title;
+      const eventId = events[i]._id;
+      const mapMarker = new Feature({
+        geometry: new Point(fromLonLat([coordinatesLng, coordinatesLat])),
+        name: eventId
+      });
+      mapMarker.setStyle([
+        new Style({
+          image: new Icon({
+          color: 'white',
+          crossOrigin: 'anonymous',
+          imgSize: [25, 25],
+          src: 'assets/images/map-pin3.svg',
+          })
+        }),
+        new Style({
+          text: new Text({
+            fill: new Fill({color: 'black'}),
+            font: 'bold 12px sans-serif',
+            offsetX: -60,
+            offsetY: 2.5,
+            stroke: new Stroke({color: 'white', width: 5}),
+            text: eventTitle.slice(0,10) + "..",
+          })
+        })
+      ]);
+      locationsArray.push(mapMarker);
+    };
+      this.placeCoordinatesOnMap(locationsArray);
+  };
+
+  placeCoordinatesOnMap(locationsArray:Array<Feature<Point>>) {
+    const vectorSource = new VectorSource({
+      features: locationsArray
+    });
+    const vectorLayer = new VectorLayer({
+      source: vectorSource,
+      className: "eventLocations"
+    });
+    this.map.addLayer(vectorLayer);
+  };
+
+  removeAllMapPoints() {
+    const existingLayers = (this.map.getLayers().getArray());
+    for(let i = 1; i < existingLayers.length; i++){
+      //layer 0 is the map itself
+      this.map.removeLayer(existingLayers[i])
+    };
+  };
+
+  ngOnInit(): void {
+    this.initializeMap();
+    this.httpService.getAllEvents().subscribe(results => {
+      this.prepareLocationsForMap(results);
+    });
+    this.httpService.getFilteredEvents().subscribe(results => {
+      this.filteredEvents = results;
+      this.removeAllMapPoints();
+      this.prepareLocationsForMap(results);
+    });
   }
 }
+
