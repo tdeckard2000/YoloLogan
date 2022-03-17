@@ -1,23 +1,29 @@
-<div class="containerMain">
-  <div class="columnLeft">
-    <img src="{{tileData.imageURL? tileData.imageURL : 'assets/images/imgPlaceHolder.png'}}" alt="Image Of Event">
-  </div>
-  <div class="columnRight">
-    <h2 [innerHTML]="tileData.title | highlightText:searchString"></h2>
-    <p> Hosted by: <span [innerHTML]="tileData.contactInfo.firstName + ' ' + tileData.contactInfo.lastName | highlightText:searchString"></span>
-    <span *ngIf="tileData.contactInfo.business" [innerHTML]="', ' + tileData.contactInfo.business | highlightText:searchString"></span></p>
+<div *ngFor="let event of events; let first = first; let last = last;">
+  <div class="containerMain" [ngClass]="{'firstInList': first, 'lastInList': last}">
+    <div class="columnLeft">
+      <img src="{{event.imageURL? event.imageURL : 'assets/images/imgPlaceHolder.png'}}" alt="Image Of Event">
+    </div>
+    <div class="verticalLine">
+    </div>
+    <div class="columnRight">
+      <h2 class="title" [innerHTML]="event.title | highlightText:searchString"></h2>
+      <!-- <p> Hosted by: <span [innerHTML]="event.contactInfo.firstName + ' ' + event.contactInfo.lastName | highlightText:searchString"></span>
+        <span *ngIf="event.contactInfo.business" [innerHTML]="', ' + event.contactInfo.business | highlightText:searchString"></span></p> -->
 
-    <p>{{tileData.address.street + ' ' + tileData.address.city + ', ' + tileData.address.state + ' ' + tileData.address.zip}}
-    <a target="_blank" href="{{'https://www.google.com/maps/place/' + tileData.address.street + ', ' + tileData.address.city + ', ' + tileData.address.state + ', ' + tileData.address.zip}}">
-    View Map</a></p>
+        <!-- <p>{{event.address.street + ' ' + event.address.city + ', ' + event.address.state + ' ' + event.address.zip}}
+          <a target="_blank" href="{{'https://www.google.com/maps/place/' + event.address.street + ', ' + event.address.city + ', ' + event.address.state + ', ' + event.address.zip}}">
+            View Map</a></p> -->
 
-    <p>{{tileData.date | date}}</p>
+            <p class="date">{{event.date | date}}</p>
 
-    <p [innerHTML]="tileData.description | highlightText:searchString"></p>
+      <!-- <p [innerHTML]="event.description | highlightText:searchString"></p> -->
 
-    <span *ngFor="let property of tileData.properties; first as isFirst">
-      <span>✔ </span>
-      {{property | titlecase}}
-    </span>
+      <div class="propertiesContainer">
+        <span *ngFor="let property of event.properties; first as isFirst">
+          <span>✔ </span>
+          {{property | titlecase}}
+        </span>
+      </div>
+    </div>
   </div>
 </div>

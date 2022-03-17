@@ -1,10 +1,11 @@
 img {
   // padding: 10px;
-  height: 150px;
-  width: 200px;
-  margin: 0px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px 1px rgb(0 0 0 / 10%);
+  height: 100px;
+  margin: 5px 5px 0px 5px;
   object-fit:cover;
-  border-radius: 10px;
+  width: 100px;
 }
 
 p {
@@ -12,23 +13,58 @@ p {
 }
 
 .columnLeft {
-  margin: 20px;
+  margin: 5px;
 }
 
 .columnRight {
-  margin: 20px;
+  margin: 5px;
+  position: relative;
+  width: 100%;
 }
 
 .containerMain {
   background-color: rgb(170, 170, 170);
-  border-radius: 5px;
+  border-radius: 2px;
+  border: 1px solid #212121;
   color: black;
   display: flex;
   flex-direction: row;
   margin: auto;
-  margin-bottom: 10px;
-  width: 98%;
+  width: 99%;
 }
+
+.date {
+  font-size: 14px;
+}
+
+.firstInList {
+  border-radius: 5px 5px 2px 2px;
+}
+
+.lastInList {
+  border-radius: 2px 2px 5px 5px;
+}
+
+.firstInList.lastInList {
+  border-radius: 5px;
+}
+
+.propertiesContainer {
+  bottom: 6px;
+  position: absolute;
+}
+
+.title {
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+// .verticalLine {
+//   border: solid #7c7c7c;
+//   border-width: 0 0 0 1px;
+//   height: 48px;
+//   position: relative;
+// }
 
 ::ng-deep .highlightedText{
   background: #71a9ff;

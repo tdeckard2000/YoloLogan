@@ -30,19 +30,19 @@
       <mat-checkbox class="checkboxItem" formControlName="indoors">Indoors</mat-checkbox>
     </section>
   </mat-drawer>
-
   <mat-drawer-content class="containerList">
-    <div id="mediaContainerEvents" class="containerEvents" *ngIf="(!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'main')">
+    <div id="mediaContainerEvents" class="containerEvents" [ngStyle]="{'display': (!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'main') ? 'initial':'none'}">
       <button class="buttonOpenPanel" *ngIf="!sidePanelIsOpen" (click)="onToggleSidePanel()">>></button>
       <div id="mediaAddNewEvent" class="addEventDiv">
         <span class="addEventLabel">Add a new event:</span>
         <input class="addEventTextInput" type="text" name="" id="" placeholder="event name" [(ngModel)]="newEventTitle">
         <button class="addEventButton" (click)="onToggleNewEventModal()">Create!</button>
       </div>
-      <app-event-tile *ngFor="let event of events" [tileData] = "event" [searchString]="searchString"></app-event-tile>
+
+      <app-event-tile></app-event-tile>
+
     </div>
     <div>
-      <!-- <app-map *ngIf="(!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'map')"></app-map> -->
       <app-map [ngStyle]="{'display': (!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'map') ? 'initial':'none'}"></app-map>
     </div>
   </mat-drawer-content>

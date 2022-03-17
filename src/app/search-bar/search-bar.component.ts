@@ -33,8 +33,14 @@ export class SearchBarComponent implements OnInit {
   }
 
   onSearchString(){
-    // this.searchStringEmitter.emit(this.searchString);
     this.mainService.setSearchString(this.searchString);
+    if(this.searchString === "") {
+      setTimeout(()=> {
+        if(this.searchString === ""){
+          this.mainService.setSearchButtonClick();
+        }
+      }, 500);
+    };
   };
 
 
