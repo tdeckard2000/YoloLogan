@@ -74,7 +74,6 @@ hr {
 
 .containerEvents {
   height: 160%;
-  margin-left: -15px;
   width: 100%;
 }
 
@@ -86,6 +85,7 @@ hr {
 .containerList {
   display: flex;
   flex-direction: row;
+  overflow: overlay;
   padding: 15px 0px;
   scrollbar-gutter: stable both-edges;
 }
