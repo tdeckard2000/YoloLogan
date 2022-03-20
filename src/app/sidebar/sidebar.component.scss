@@ -102,3 +102,18 @@ hr {
 .filterForm {
   overflow: hidden;
 }
+
+.mobileCloseIcon {
+  background-color: #0000005c;
+  border-radius: 4%;
+  border-width: 0;
+  bottom: 0;
+  color: white;
+  font: 400 16px/20px Roboto, "Helvetica Neue", sans-serif;
+  padding: 10px 10px;
+  position: absolute;
+  right: 12px;
+  text-align: center;
+  width: 80px;
+  z-index: 100;
+}

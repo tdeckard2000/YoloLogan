@@ -46,12 +46,16 @@ export class SidebarComponent implements OnInit {
   searchString:string = '';
   sidePanelIsOpen = true;
 
+  deselectMobileTool() {
+    this.mainService.setMobileToolSelected('main');
+  };
+
   getFilteredEvents(searchString: string, filters: FilterObject) {
     this.httpService.updateFilteredEvents(searchString, filters);
     this.httpService.getFilteredEvents().subscribe(results => {
       this.events = results;
     });
-  }
+  };
 
   onToggleSidePanel(){
     this.sidePanelIsOpen = !this.sidePanelIsOpen;

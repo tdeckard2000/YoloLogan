@@ -62,6 +62,9 @@ export class SearchBarComponent implements OnInit {
       const filterObject = results;
       this.toggleFilterIconColor(filterObject);
     });
+    this.mainService.getMobileToolSelected().subscribe(results => {
+      this.mobileToolSelected = results;
+    });
   }
 
 }
