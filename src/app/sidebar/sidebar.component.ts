@@ -1,5 +1,4 @@
 import { BreakpointState} from '@angular/cdk/layout';
-import { resolve } from '@angular/compiler-cli/src/ngtsc/file_system';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { Filter } from 'mongodb';
@@ -17,7 +16,7 @@ import { WindowSizeService } from '../services/window-size.service';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(fb: FormBuilder, private httpService:HttpService, private mainService:MainService, private windowSize:WindowSizeService, private modalService:ModalService) {
+  constructor(fb: FormBuilder, private httpService:HttpService, private mainService:MainService, private windowSizeService:WindowSizeService, private modalService:ModalService) {
     this.checkboxFilters = fb.group({
       kidFriendly: false,
       adultsOnly: false,
@@ -76,8 +75,8 @@ export class SidebarComponent implements OnInit {
       this.mobileToolSelected = result;
     });
 
-    this.windowSize.getIsMobile().subscribe((result:BreakpointState)=>{
-      this.isMobileDisplay = result.matches;
+    this.windowSizeService.getIsMobile().subscribe((result:boolean)=>{
+      this.isMobileDisplay = result;
     });
 
     this.mainService.getSearchButtonClick().subscribe((result: boolean)=>{

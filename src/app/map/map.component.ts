@@ -14,6 +14,7 @@ import { EventObject } from '../services/interfaces';
 import { ObjectId } from 'mongodb';
 import { Subscription } from 'rxjs';
 import { MainService } from '../services/main.service';
+import { WindowSizeService } from '../services/window-size.service';
 
 @Component({
   selector: 'app-map',
@@ -22,9 +23,10 @@ import { MainService } from '../services/main.service';
 })
 export class MapComponent implements OnInit {
 
-  constructor(private httpService:HttpService, private mainService:MainService) { }
+  constructor(private httpService:HttpService, private windowSizeService:WindowSizeService) { }
 
   filteredEvents: Array<EventObject> = []
+  isMobileDisplay:boolean = false;
   loganLonLat = [-111.830833, 41.737778];
   loganWebMercator = fromLonLat(this.loganLonLat);
   mainLayer = new TileLayer({source: new OSM()});
@@ -106,14 +108,11 @@ export class MapComponent implements OnInit {
       this.removeAllMapPoints();
       this.prepareLocationsForMap(results);
     });
-    // this.mainService.getMobileToolSelected().subscribe(result=> {
-    //   if(result === "map") {
-    //     this.map.setTarget();
-    //     this.map.updateSize();
-    //     this.map.setTarget('ol-map');
-    //     this.initializeMap();
-    //   };
-    // });
+    this.windowSizeService.setIsMobile();
+    this.windowSizeService.getIsMobile().subscribe(results => {
+      this.isMobileDisplay = results;
+    });
+
   }
 }
 

@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout'
 import { Injectable } from '@angular/core';
-import { PartialObserver } from 'rxjs';
+import { PartialObserver, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +9,21 @@ export class WindowSizeService {
 
   constructor(private breakpointObserver:BreakpointObserver) { }
 
-  public isSmallScreen$ = this.breakpointObserver.observe(['(max-width: 500px)']);
+  private isSmallScreen$:Subject<boolean> = new Subject;
 
-  getIsMobile(){
-    return this.isSmallScreen$;
-  }
+  getIsMobile() {
+    return this.isSmallScreen$.asObservable();
+  };
+
+  setIsMobile() {
+    const isSmallScreen:any = this.breakpointObserver.observe(['(max-width: 500px)']).subscribe(result=> {
+      if(result.matches === true) {
+        this.isSmallScreen$.next(true);
+        console.log("true")
+      } else {
+        this.isSmallScreen$.next(false);
+      };
+    });
+  };
 
 }

@@ -55,8 +55,8 @@ export class SearchBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.windowSize.getIsMobile().subscribe((result:BreakpointState)=>{
-      this.isMobileDisplay = result.matches;
+    this.windowSize.getIsMobile().subscribe((result:boolean)=>{
+      this.isMobileDisplay = result;
     });
     this.mainService.getFilterSelections().subscribe(results => {
       const filterObject = results;
