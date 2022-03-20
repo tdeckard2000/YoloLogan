@@ -4,5 +4,7 @@
         "titlecase",
         "Yolo"
     ],
-    "editor.fontLigatures": true
+    "editor.fontLigatures": true,
+    "html.hover.references": false,
+    "editor.hover.enabled": false
 }

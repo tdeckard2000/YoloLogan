@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { MainService } from '../services/main.service';
 import { BreakpointState} from '@angular/cdk/layout';
 import { WindowSizeService } from '../services/window-size.service';
+import { FilterObject } from '../services/interfaces';
 
 @Component({
   selector: 'app-search-bar',
@@ -15,8 +16,9 @@ export class SearchBarComponent implements OnInit {
   constructor(private mainService:MainService, private windowSize:WindowSizeService) { }
 
   isMobileDisplay:boolean = false;
-  searchString = '';
   mobileToolSelected = 'main';
+  searchString = '';
+  someFilterApplied = false;
 
   onSearchClick() {
     this.mainService.setSearchButtonClick();
@@ -43,10 +45,22 @@ export class SearchBarComponent implements OnInit {
     };
   };
 
+  toggleFilterIconColor(filterObject: FilterObject) {
+    const filterBooleanArray = Object.values(filterObject);
+      if (filterBooleanArray.includes(true)) {
+        this.someFilterApplied = true;
+      } else {
+        this.someFilterApplied = false;
+      }
+  }
 
   ngOnInit(): void {
     this.windowSize.getIsMobile().subscribe((result:BreakpointState)=>{
       this.isMobileDisplay = result.matches;
+    });
+    this.mainService.getFilterSelections().subscribe(results => {
+      const filterObject = results;
+      this.toggleFilterIconColor(filterObject);
     });
   }
 

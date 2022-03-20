@@ -60,6 +60,10 @@
   text-align: center;
 }
 
+.inactiveIcon {
+  filter: saturate(0);
+}
+
 .mobileButtonToggles {
   display: none;
   flex-direction: row;
