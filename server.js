@@ -237,3 +237,6 @@ const prepareFilterSelections = function(filterSelections) {
 app.listen(port, ()=>{
   console.warn("Listening on " + port);
 });
+
+// To listen on mobile:
+// ngrok http http://localhost:4200 -host-header="localhost:4200"

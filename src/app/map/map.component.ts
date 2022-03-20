@@ -106,13 +106,14 @@ export class MapComponent implements OnInit {
       this.removeAllMapPoints();
       this.prepareLocationsForMap(results);
     });
-    this.mainService.getMobileToolSelected().subscribe(result=> {
-      if(result === "map") {
-        // this.map.setTarget();
-        // this.map.setTarget('ol-map');
-        this.initializeMap();
-      };
-    });
+    // this.mainService.getMobileToolSelected().subscribe(result=> {
+    //   if(result === "map") {
+    //     this.map.setTarget();
+    //     this.map.updateSize();
+    //     this.map.setTarget('ol-map');
+    //     this.initializeMap();
+    //   };
+    // });
   }
 }
 

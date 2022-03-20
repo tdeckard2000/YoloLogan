@@ -43,7 +43,7 @@
 
     </div>
     <div>
-      <app-map [ngStyle]="{'display': (!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'map') ? 'initial':'none'}"></app-map>
+      <app-map [ngStyle]="{'visibility': (!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'map') ? 'initial':'hidden'}"></app-map>
     </div>
   </mat-drawer-content>
 
