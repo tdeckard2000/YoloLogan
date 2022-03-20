@@ -100,7 +100,8 @@ hr {
 }
 
 .filterForm {
-  overflow: hidden;
+  height: 68%;
+  overflow: auto;
 }
 
 .mobileCloseIcon {
@@ -116,4 +117,11 @@ hr {
   text-align: center;
   width: 80px;
   z-index: 100;
+}
+
+.resultsCount {
+  font-size: .8rem;
+  margin-left: 12px;
+  margin-top: 20px;
+  // text-align: center;
 }

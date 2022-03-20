@@ -29,6 +29,7 @@
       <mat-checkbox class="checkboxItem" formControlName="outdoors">Outdoors</mat-checkbox>
       <mat-checkbox class="checkboxItem" formControlName="indoors">Indoors</mat-checkbox>
     </section>
+    <p class="resultsCount">Results: {{events.length}}</p>
   </mat-drawer>
   <mat-drawer-content class="containerList">
     <div id="mediaContainerEvents" class="containerEvents" [ngStyle]="{'display': (!isMobileDisplay) || (isMobileDisplay && mobileToolSelected === 'main') ? 'initial':'none'}">
