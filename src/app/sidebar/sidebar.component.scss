@@ -79,7 +79,7 @@ hr {
 
 .containerFilter {
   padding: 30px;
-  width: 180px;
+  width: 200px;
 }
 
 .containerList {
@@ -101,7 +101,8 @@ hr {
 
 .filterForm {
   height: 68%;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .mobileCloseIcon {
