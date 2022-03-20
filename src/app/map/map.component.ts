@@ -108,7 +108,8 @@ export class MapComponent implements OnInit {
     });
     this.mainService.getMobileToolSelected().subscribe(result=> {
       if(result === "map") {
-        this.map.setTarget('ol-map')
+        this.map.setTarget();
+        this.map.setTarget('ol-map');
       };
     });
   }
