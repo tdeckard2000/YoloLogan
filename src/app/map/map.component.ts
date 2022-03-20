@@ -59,7 +59,7 @@ export class MapComponent implements OnInit {
           image: new Icon({
           color: 'white',
           crossOrigin: 'anonymous',
-          imgSize: [15, 15],
+          imgSize: [20, 20],
           src: 'assets/images/map-pin3.svg',
           })
         }),
