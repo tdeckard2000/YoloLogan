@@ -13,6 +13,7 @@ import { HttpService } from '../services/http.service';
 import { EventObject } from '../services/interfaces';
 import { ObjectId } from 'mongodb';
 import { Subscription } from 'rxjs';
+import { MainService } from '../services/main.service';
 
 @Component({
   selector: 'app-map',
@@ -21,7 +22,7 @@ import { Subscription } from 'rxjs';
 })
 export class MapComponent implements OnInit {
 
-  constructor(private httpService:HttpService) { }
+  constructor(private httpService:HttpService, private mainService:MainService) { }
 
   filteredEvents: Array<EventObject> = []
   loganLonLat = [-111.830833, 41.737778];
@@ -104,6 +105,11 @@ export class MapComponent implements OnInit {
       this.filteredEvents = results;
       this.removeAllMapPoints();
       this.prepareLocationsForMap(results);
+    });
+    this.mainService.getMobileToolSelected().subscribe(result=> {
+      if(result === "map") {
+        this.map.setTarget('ol-map')
+      };
     });
   }
 }
