@@ -1,5 +1,5 @@
 <div *ngFor="let event of events; let first = first; let last = last;">
-  <div class="containerMain" [ngClass]="{'firstInList': first, 'lastInList': last}">
+  <div [ngClass]="{'firstInList': first, 'lastInList': last, 'containerMainDesktop': !isMobile, 'containerMainMobile': isMobile}">
     <div class="columnLeft">
       <img src="{{event.imageURL? event.imageURL : 'assets/images/imgPlaceHolder.png'}}" alt="Image Of Event">
     </div>
