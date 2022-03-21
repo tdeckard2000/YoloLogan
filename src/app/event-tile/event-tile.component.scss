@@ -23,10 +23,14 @@ p {
 }
 
 .containerMain {
-  background-color: rgb(170, 170, 170);
+  // background-color: rgb(170, 170, 170);
+  background-color: #303134;
   border-radius: 2px;
-  border: 1px solid #212121;
-  color: black;
+  border: solid #3c4043;
+  border-width: 1px 1px 0 1px;
+  // border: 1px solid #212121;
+  // color: black;
+  color: #d8dedf;
   display: flex;
   flex-direction: row;
   margin: auto;
