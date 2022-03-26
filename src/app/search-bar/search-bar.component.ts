@@ -15,13 +15,20 @@ export class SearchBarComponent implements OnInit {
 
   constructor(private mainService:MainService, private windowSize:WindowSizeService) { }
 
+  activeMobileSearchIcon = false;
   isMobileDisplay:boolean = false;
   mobileToolSelected = 'main';
   searchString = '';
+  showSearchBarOnMobile = false;
   someFilterApplied = false;
 
   onSearchClick() {
     this.mainService.setSearchButtonClick();
+    if(this.searchString.length > 0) {
+      this.activeMobileSearchIcon = true;
+    } else {
+      this.activeMobileSearchIcon = false;
+    }
   };
 
   onMobileToolToggle(buttonName:string){
@@ -39,11 +46,15 @@ export class SearchBarComponent implements OnInit {
     if(this.searchString === "") {
       setTimeout(()=> {
         if(this.searchString === ""){
-          this.mainService.setSearchButtonClick();
+          this.onSearchClick();
         }
       }, 500);
     };
   };
+
+  onShowSearchBar() {
+    this.showSearchBarOnMobile = !this.showSearchBarOnMobile;
+  }
 
   toggleFilterIconColor(filterObject: FilterObject) {
     const filterBooleanArray = Object.values(filterObject);

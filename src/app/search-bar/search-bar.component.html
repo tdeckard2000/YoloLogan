@@ -10,12 +10,15 @@
           Logan Utah Lifestyle 0.07
         </div>
       </div>
+      <div class="mobileSearchButton" (click)="onShowSearchBar()" *ngIf="isMobileDisplay" [ngClass]="{'selected': showSearchBarOnMobile, 'inactiveIcon': !activeMobileSearchIcon}">
+        <img src="/assets/images/searchIconMobile.svg" alt="">
+      </div>
       <mat-button-toggle-group class="pageToggle" name="pageToggle" aria-label="Font Style">
         <mat-button-toggle class="pageToggleButton" value="eventsAndGroups" checked="true">Events & Groups</mat-button-toggle>
         <mat-button-toggle class="pageToggleButton" value="communityResources">Community Resources</mat-button-toggle>
       </mat-button-toggle-group>
     </div>
-    <div class="col2">
+    <div class="col2" *ngIf="!isMobileDisplay || showSearchBarOnMobile">
         <input (keydown.enter)="onSearchClick()" (keydown.return)="onSearchClick()" id="searchBar" [(ngModel)]="searchString" (keyup)="onSearchString()" type="text">
         <button *ngIf="!isMobileDisplay" (click)="onSearchClick()" class="searchButton"></button>
     </div>
