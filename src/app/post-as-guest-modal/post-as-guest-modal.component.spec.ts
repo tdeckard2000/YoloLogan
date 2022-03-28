@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PostAsGuestModalComponent } from './post-as-guest-modal.component';
@@ -8,6 +9,7 @@ describe('PostAsGuestComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [ PostAsGuestModalComponent ]
     })
     .compileComponents();

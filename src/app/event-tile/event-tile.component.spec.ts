@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {HttpClientTestingModule} from '@angular/common/http/testing'
 import { EventTileComponent } from './event-tile.component';
 
 describe('EventTileComponent', () => {
@@ -8,7 +8,8 @@ describe('EventTileComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EventTileComponent ]
+      imports: [HttpClientTestingModule],
+      declarations: [ EventTileComponent]
     })
     .compileComponents();
   });

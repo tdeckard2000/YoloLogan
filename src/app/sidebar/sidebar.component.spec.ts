@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { SidebarComponent } from './sidebar.component';
 
@@ -8,7 +11,8 @@ describe('SidebarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SidebarComponent ]
+      imports: [ReactiveFormsModule, FormsModule, HttpClientTestingModule, MatCheckboxModule],
+      declarations: [ SidebarComponent ],
     })
     .compileComponents();
   });

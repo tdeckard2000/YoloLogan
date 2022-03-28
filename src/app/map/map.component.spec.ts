@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MapComponent } from './map.component';
@@ -8,6 +9,7 @@ describe('MapComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ HttpClientTestingModule ],
       declarations: [ MapComponent ]
     })
     .compileComponents();
@@ -22,4 +24,9 @@ describe('MapComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('should have logan coordinates',async () => {
+  //   let loganCoordinates = component.loganLonLat;
+  //   expect(loganCoordinates === [-111.830833, 41.737778])
+  // });
 });
