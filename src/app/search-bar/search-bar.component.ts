@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output} from '@angular/core';
 import { MainService } from '../services/main.service';
 import { BreakpointState} from '@angular/cdk/layout';
 import { WindowSizeService } from '../services/window-size.service';
@@ -13,7 +13,7 @@ export class SearchBarComponent implements OnInit {
 
   @Output() searchStringEmitter = new EventEmitter();
 
-  constructor(private mainService:MainService, private windowSize:WindowSizeService) { }
+  constructor(private mainService: MainService, private windowSize: WindowSizeService, private elementRef: ElementRef) { }
 
   activeMobileSearchIcon = false;
   isMobileDisplay:boolean = false;
@@ -54,7 +54,13 @@ export class SearchBarComponent implements OnInit {
 
   onShowSearchBar() {
     this.showSearchBarOnMobile = !this.showSearchBarOnMobile;
-  }
+    if(this.showSearchBarOnMobile === true) {
+      setTimeout(()=>{
+        let searchBarInput = document.getElementById('searchBar');
+        searchBarInput?.focus();
+      }, 10);
+    };
+  };
 
   toggleFilterIconColor(filterObject: FilterObject) {
     const filterBooleanArray = Object.values(filterObject);

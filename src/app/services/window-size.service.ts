@@ -19,7 +19,6 @@ export class WindowSizeService {
     const isSmallScreen:any = this.breakpointObserver.observe(['(max-width: 500px)']).subscribe(result=> {
       if(result.matches === true) {
         this.isSmallScreen$.next(true);
-        console.log("true")
       } else {
         this.isSmallScreen$.next(false);
       };
