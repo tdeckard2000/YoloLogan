@@ -5,6 +5,5 @@
         "Yolo"
     ],
     "editor.fontLigatures": true,
-    "html.hover.references": false,
-    "editor.hover.enabled": false
+    "html.hover.references": false
 }
