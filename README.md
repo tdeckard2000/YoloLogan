@@ -1,5 +1,7 @@
 # YoloLogan
 
+### View Here
 Heroku Link: https://yolologan.herokuapp.com/
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.11.
+### Screenshot
+<image style="width:150px" src="https://raw.githubusercontent.com/tdeckard2000/YoloLogan/main/master/example.png"></image>
