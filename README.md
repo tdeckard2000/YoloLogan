@@ -4,4 +4,4 @@
 Heroku Link: https://yolologan.herokuapp.com/
 
 ### Screenshot
-<image style="width:150px" src="https://raw.githubusercontent.com/tdeckard2000/YoloLogan/main/master/example.png"></image>
+<image style="width:150px" src="https://raw.githubusercontent.com/tdeckard2000/YoloLogan/master/example.png"></image>
